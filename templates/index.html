@@ -26,7 +26,12 @@
             <a href="browse.html">Home</a>
         </nav>
     {% endblock nav %}
+    <div w3-include-html="header.html"></div>
+    <script src="includeHeader.js"></script>
 
+    <img id='banner' src="../src/pictures/banner.jpg" alt="aa">
+    <div class=''></div>
+    {% block body %}{% endblock %}
     {% block footer %}
         <footer>
         <section style="float: left; width: 25%">
@@ -45,3 +50,14 @@
     {% endblock footer %}
 </body>
 </html>
+
+<style>
+html{
+    margin:-10px;
+}
+#banner{
+    width:100%;
+    max-height: 400px;
+}
+</style>
+ 
