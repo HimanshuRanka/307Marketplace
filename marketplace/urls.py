@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from marketplace import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index),
+    path('login/', views.user_login, name='user_login'),
+    path('browse/', views.index, name='browse'),
+    path('register/', views.register, name='register')
 ]
