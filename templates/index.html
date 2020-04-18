@@ -1,3 +1,7 @@
+{# This file kind of confused me and I wasnt sure where it goes so I have kinda edited it kinda left it #}
+{# This ownt run in DJango atm cause its not formatted right, but the thml is fine #}
+
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,32 +12,32 @@
     {% endblock style %}
     <meta charset="UTF-8">
     {% block title %}
-    <title>Index</title>
+        <title>Index</title>
     {% endblock title %}
 
 </head>
 <body>
-    {% block header %}
-        <header>
-            <p>This is our MARKET-PLACE</p>
-        </header>
-    {% endblock header %}
+{% block header %}
+    <header>
 
-    {% block nav %}
-        <nav>
-            <a href="login.html">login</a>
-            <a href="signup.html">signup</a>
-            <a href="browse.html">Home</a>
-        </nav>
-    {% endblock nav %}
-    <div w3-include-html="header.html"></div>
-    <script src="includeHeader.js"></script>
+    </header>
+{% endblock header %}
 
-    <img id='banner' src="../src/pictures/banner.jpg" alt="aa">
-    <div class=''></div>
-    {% block body %}{% endblock %}
-    {% block footer %}
-        <footer>
+{% block nav %}
+    <nav>
+        <a href="login.html">login</a>
+        <a href="signup.html">signup</a>
+        <a href="browse.html">Home</a>
+    </nav>
+{% endblock nav %}
+<div w3-include-html="header.html"></div>
+<script src="includeHeader.js"></script>
+
+<img id='banner' src="../src/pictures/banner.jpg" alt="aa">
+<div class=''></div>
+{% block body %}{% endblock %}
+{% block footer %}
+    <footer>
         <section style="float: left; width: 25%">
             <p>Himanshu</p>
             <p>Brian</p>
@@ -47,17 +51,18 @@
             <p>Email: dontemailhere@thisissfake.com</p>
         </section>
     </footer>
-    {% endblock footer %}
+{% endblock footer %}
 </body>
 </html>
 
 <style>
-html{
-    margin:-10px;
-}
-#banner{
-    width:100%;
-    max-height: 400px;
-}
+    html {
+        margin: -10px;
+    }
+
+    #banner {
+        width: 100%;
+        max-height: 400px;
+    }
 </style>
  

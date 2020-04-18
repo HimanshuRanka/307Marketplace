@@ -1,38 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <style>
-        .about {
-            display: inline-block;
-            width: 20%;
-            border-style: ridge;
-            height: 200px;
-            text-align: center;
-        }
-
-        .product {
-            width: 33%;
-            border-style: ridge;
-            height: 200px;
-            text-align: center;
-            float: left;
-        }
-
-        .container{
-            margin: auto;
-            text-align: center;
-            width: 100%;
-            border-style: outset;
-            padding: 20px;
-            height: auto;
-        }
-
-    </style>
-    <meta charset="UTF-8">
-    <title>Browse</title>
-</head>
-<body>
-        <div w3-include-html="header.html"></div>
-        <script src="includeHeader.js"></script>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block style %}
+    {# This is for any additional style. We could look into using css files, but for now this works #}
+{% endblock %}
+{% block body-block %}
+    {# This is the browse page, I have not gcome around to adding anything here #}
+    {# What ever code would go into a <body></body> would go here #}
+    {# I think, if u need to add anything outside body, just go ahead and add it. #}
+{% endblock %}
