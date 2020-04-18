@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "base.html" %}
+{% block style %}
     <style>
         .center {
             margin: auto;
@@ -25,13 +24,9 @@
             height: 20px;
 
         }
-
     </style>
-    <meta charset="UTF-8">
-    <title>login</title>
-</head>
-
-<body>
+{% endblock %}
+{% block body-block %}
     <h1 class="center">Login</h1>
     <div class="center">
         <form action="">
@@ -42,5 +37,6 @@
 
         </form>
     </div>
-</body>
-</html>
+{% endblock %}
+
+

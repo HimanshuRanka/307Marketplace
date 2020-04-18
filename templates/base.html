@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% block style %}
-        <style>
 
-        </style>
+    {% block style %}
+        <style></style>
     {% endblock style %}
+
     <meta charset="UTF-8">
     {% block title %}
     <title>Index</title>
@@ -26,7 +26,9 @@
             <a href="browse.html">Home</a>
         </nav>
     {% endblock nav %}
+    {% block body-block %}
 
+    {% endblock %}
     {% block footer %}
         <footer>
         <section style="float: left; width: 25%">
