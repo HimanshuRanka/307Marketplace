@@ -1,16 +1,6 @@
-{% extends 'account/base.html' %}
-
-{% block nav %}
-{% endblock %}
+{% extends 'account/../base.html' %}
 
 {% block body-block %}
-        <div class='header'>
-            <a href="{% url 'browse' %}">Home</a>
-            <a href="{% url 'user_logout' %}">logout</a>
-            <a href="{% url 'register' %}">Sign up</a>
-            {# If time permits add a switch account #}
-            <a href="{% url 'cart' %}">Cart</a>
-        </div>
     {% for prod in cart_list %}
         <div>
             {# print out the product #}

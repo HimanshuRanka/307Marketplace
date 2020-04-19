@@ -125,4 +125,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'C:/Users/himan/marketplace/media'
 
+LOGIN_URL = 'account/login/'
+
 LOGIN_REDIRECT_URL = 'browse'

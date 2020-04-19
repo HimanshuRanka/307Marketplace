@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect, HttpResponse
@@ -43,6 +44,7 @@ def user_login(request):
                                 password=form.cleaned_data['password'])
             if user is not None:
                 login(request, user)
+                request.session['username'] = form.cleaned_data['username']
                 if 'next' in request.GET:
                     return HttpResponseRedirect(request.GET['next'])
                 return HttpResponseRedirect(reverse('browse'))
@@ -57,5 +59,6 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('user_login'))
 
 
+@login_required
 def my_account(request):
     return render(request, 'account/Account.html')

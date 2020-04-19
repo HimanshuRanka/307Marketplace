@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Create your views here.
@@ -5,6 +6,7 @@ from Market.forms import NewProductForm
 from Market.models import Product
 
 
+@login_required
 def add_product(request):
     context = {}
     if request.method == 'POST':
@@ -17,6 +19,7 @@ def add_product(request):
     return render(request, 'Market/new_product.html', context)
 
 
+@login_required
 def cart(request):
     # cart_list = Product.objects.order_by('price')
     # context = {'cart_list': cart_list}

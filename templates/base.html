@@ -58,10 +58,17 @@
 
 {% block nav %}
     <nav>
-        <div class='header'><a href="{% url 'browse' %}">Home</a>
-            <a href="{% url 'my_account' %}">Account</a>
-            <a href="{% url 'browse' %}">Browse</a>
-            <a href="{% url 'cart' %}">Cart</a>
+        <div class='header'>
+            <a href="{% url 'browse' %}">Home</a>
+            {# If time permits add a switch account #}
+            {% if request.user.is_anonymous %}
+                <a href="{% url 'user_login' %}">Login</a>
+                <a href="{% url 'register' %}">Register</a>
+            {% else %}
+                <a href="{% url 'my_account' %}">hello, {{ request.session.username }}</a>
+                <a href="{% url 'cart' %}">Cart</a>
+                <a href="{% url 'user_logout' %}">Logout</a>
+            {% endif %}
         </div>
     </nav>
 {% endblock nav %}
