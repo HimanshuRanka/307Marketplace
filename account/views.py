@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect, HttpResponse
@@ -50,3 +50,12 @@ def user_login(request):
                 form.add_error(None, 'Unable to log in')
         context['form'] = form
     return render(request, 'account/login.html', context)
+
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('user_login'))
+
+
+def my_account(request):
+    return render(request, 'account/Account.html')

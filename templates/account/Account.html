@@ -1,0 +1,27 @@
+{% extends 'account/base.html' %}
+
+{% block nav %}
+    {% if loggedin %}
+        <div class='header'>
+            <a href="{% url 'browse' %}">Home</a>
+            <a href="{% url 'user_logout' %}">logout</a>
+            <a href="{% url 'register' %}">Sign up</a>
+            {# If time permits add a switch account #}
+            <a href="{% url 'cart' %}">Cart</a>
+            <a href="{% url 'new_product' %}"> Add Listing</a>
+        </div>
+    {% else %}
+        <div class='header'>
+            <a href="{% url 'browse' %}">Home</a>
+            <a href="{% url 'user_login' %}">Login</a>
+            <a href="{% url 'register' %}">Sign up</a>
+            <a href="{% url 'cart' %}">Cart</a>
+            {# implement the checker, but and omit below line. This is for testing #}
+            <a href="{% url 'new_product' %}"> Add Listing</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block body-block %}
+
+{% endblock %}

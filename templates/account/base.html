@@ -59,10 +59,9 @@
 {% block nav %}
     <nav>
         <div class='header'><a href="{% url 'browse' %}">Home</a>
-            <a href="{% url 'user_login' %}">Login</a>
-            <a href="{% url 'register' %}">Sign up</a>
+            <a href="{% url 'my_account' %}">Account</a>
             <a href="{% url 'browse' %}">Browse</a>
-            <a href="">Cart</a>
+            <a href="{% url 'cart' %}">Cart</a>
         </div>
     </nav>
 {% endblock nav %}

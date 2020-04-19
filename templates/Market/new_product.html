@@ -1,0 +1,61 @@
+{% extends 'account/base.html'%}
+{% block style %}
+<style>{# lowkey terrible CSS but I just wanted something presentable atm lol #}
+    .center {
+        margin: auto;
+        width: 40%;
+        text-align: center;
+
+    }
+
+    h1 {
+        padding: 10px;
+    }
+
+    div {
+        border-style: inset;
+        padding: 30px;
+    }
+
+    input {
+        margin: auto;
+        width: 70%;
+        text-align: center;
+        border-style: groove;
+        border-color: darkgray;
+        margin-bottom: 5px;
+        height: 20px;
+
+    }
+    </style>
+{% endblock %}
+{% block body-block %}
+<div class="center">
+    <form method="post" action="">
+        {% csrf_token %}
+        <p>
+            <input type="text" class="allign" name="product" placeholder="Product Title" value="{{ form.data.product }}">
+            {{ form.product.errors }}
+        </p>
+        <p>
+            <input type="image" class="allign" name="product_picture" placeholder="image" value="{{ form.data.product_picture }}">
+            {{ form.product_picture.errors }}
+        </p>
+        <p>
+            <input type="text" class="allign" name="description" placeholder="Description" value="{{ form.data.description }}"
+            {{ form.description.errors }}
+        </p>
+        <p>
+            <input type="number" class="allign" name="price" placeholder="Price" value="{{ form.data.price }}">
+            {{ form.price.errors }}
+        </p>
+        <p>
+            <input type="number" class="allign" name="stock" placeholder="Stock" value="{{ form.data.stock }}">
+            {{ form.stock.errors }}
+        </p>
+        <input class="allign" type="submit">
+
+    </form>
+
+</div>
+{% endblock %}
