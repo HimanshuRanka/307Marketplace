@@ -23,18 +23,10 @@
     </header>
 {% endblock header %}
 
-{% block nav %}
-    <nav>
-        <a href="login.html">login</a>
-        <a href="signup.html">signup</a>
-        <a href="browse.html">Home</a>
-    </nav>
-{% endblock nav %}
-<div w3-include-html="header.html"></div>
-<script src="includeHeader.js"></script>
 
-<img id='banner' src="../../src/pictures/banner.jpg" alt="aa">
-<div class=''></div>
+{% load static %}
+<img id='banner' src="{% static "banner.jpg%"}" alt="aa">
+
 {% block body %}{% endblock %}
 {% block footer %}
     <footer>

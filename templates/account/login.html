@@ -3,57 +3,75 @@
 
 
 {% block style %}
-    <style>{# lowkey terrible CSS but I just wanted something presentable atm lol #}
-    .center {
-        margin: auto;
-        width: 40%;
-        text-align: center;
+    <style> 
+    #loginPage{
+        background-color: rgb(139, 173, 192);
+        padding:200px;
+        padding-bottom: 100%;
+        margin-right:-10px;
+        margin-left:-10px;
+        margin-bottom:-100px;
 
     }
 
-    h1 {
+    .center {
+        margin: auto;
+        width: 60%;
+        text-align: center;
+    }
+    #title{
+        font-size:500%;
         padding: 10px;
     }
 
-    div {
-        border-style: inset;
-        padding: 30px;
-    }
-
-    input {
+    .submitButton{
+        height:80px;
+        width:200px;
         margin: auto;
-        width: 70%;
         text-align: center;
-        border-style: groove;
-        border-color: darkgray;
+        border-style:none;
+        background-color: dimgray;
         margin-bottom: 5px;
-        height: 20px;
-
+        font-size: 150%;
     }
+
+    .submitButton:hover{
+        background-color: rgb(156, 156, 156);
+        cursor: pointer;
+    }
+
+    .box{
+        width:500px;
+        height:65px;
+        font-size:200%;
+        margin-top:20px;
+        margin-bottom:20px;
+    }
+
     </style>
 
 {% endblock %}
 {% block body-block %}
     {# I have kept you js code for now, as without it the base file isnt imported unless you run the django server #}
     {# It should essentially look the same with or without the server rn, so for styling and dev this is good #}
-    <div w3-include-html="header.html"></div>
-    <script src="includeHeader.js"></script>
 
-    <h1 class="center">Login</h1>
+<div id="loginPage">
+    <h1 id="title" class="center">Login</h1>
     <div class="center">
         <form method="POST" action="{% url 'user_login' %}">
             {% csrf_token %}
             <p>
-                <input type="text" name="username" value="{{ form.data.username }}" placeholder="Username"><br>
+                <input class="box" type="text" name="username" value="{{ form.data.username }}" placeholder="Username"><br>
                 {{ form.username.errors }}
             </p>
             <p>
-                <input type="text" name="password" value="{{ form.data.password }}" placeholder="Password"><br>
+                <input class="box" type="text" name="password" value="{{ form.data.password }}" placeholder="Password"><br>
                 {{ form.password.errors }}
             </p>
-            <input style="background-color: dimgrey; color: lightgrey" type="submit">
+            <input class="submitButton" style="color: rgb(255, 255, 255)" type="submit";>
         </form>
     </div>
+</div>
 {% endblock %}
 
 

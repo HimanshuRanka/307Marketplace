@@ -3,81 +3,99 @@
 {% extends "account/../base.html" %}
 {% block style %}
     <style>
-        .center {
-            margin: auto;
-            width: 40%;
-            text-align: center;
-        }
+    #signupPage{
+        background-color: rgb(139, 173, 192);
+        padding:200px;
+        padding-bottom: 100%;
+        margin-right:-10px;
+        margin-left:-10px;
+    }
 
-        h1 {
-            padding: 10px;
-        }
+    #name{
+        margin-left:20px;
+        margin-right:20px;
+    }
 
-        div {
-            border-style: inset;
-            padding: 30px;
-        }
+    .center{
+        margin: auto;
+        width: 60%;
+        text-align: center;
+    }
 
-        .allign {
-            margin: auto;
-            width: 70%;
-            text-align: center;
-            border-style: groove;
-            border-color: darkgray;
-            margin-bottom: 5px;
-            height: 20px;
-        }
+    #title{
+        font-size:500%;
+        padding: 10px;
 
-        .hori {
-            text-align: center;
-            border-style: groove;
-            border-color: darkgray;
-            margin-bottom: 5px;
-            height: 20px;
-        }
+    }
+
+
+    .submitButton{
+        height:80px;
+        width:200px;
+        margin: auto;
+        text-align: center;
+        border-style:none;
+        background-color: dimgray;
+        margin-bottom: 5px;
+        font-size: 150%;
+    }
+
+    .submitButton:hover{
+        background-color: rgb(156, 156, 156);
+        cursor: pointer;
+    }
+
+    .box{
+        width:500px;
+        height:65px;
+        font-size:200%;
+        margin-top:20px;
+        margin-bottom:20px;
+    }
+
     </style>
 {% endblock %}
 
 {% block body-block %}
-    <div w3-include-html="header.html"></div>
-    <script src="includeHeader.js"></script>
 
-    <h1 class="center">Sign-Up</h1>
+<div id="signupPage">
+    <h1 id="title" class="center">Sign-Up</h1>
     <div class="center">
         <form method="POST" action="{% url 'register' %}">
             {% csrf_token %}
             <p>
-                <input type="text" class="hori" name="first_name" value="{{ form.data.first_name }}"
+                <input id="name" class="box" type="text" class="hori" name="first_name" value="{{ form.data.first_name }}"
                 placeholder="First Name">
                 {{ form.first_name.errors }}
-                <input type="text" class="hori" name="last_name" value="{{ form.data.last_name }}"\
+                <input id="name" class="box" type="text" class="hori" name="last_name" value="{{ form.data.last_name }}"\
                 placeholder="Last Name">
                 {{ form.last_name.errors }}
             </p>
             <p></p>
             <p>
-                <input type="text" class="allign" name="username" value="{{ form.data.username }}"
+                <input class="box" type="text" class="allign" name="username" value="{{ form.data.username }}"
                        placeholder="Username">
                 {{ form.username.errors }}
             </p>
             <p>
-                <input type="text" class="allign" name="password"
+                <inputc lass="box" type="text" class="allign" name="password"
                     placeholder="Password">
                 {{ form.password.errors }}
             </p>
             <p>
-                <input type="text" class="allign" name="password_confirm"
+                <input class="box" type="text" class="allign" name="password_confirm"
                        placeholder="Confirm Password">
                 {{ form.password_confirm.errors }}
             </p>
             <p>
-                <input type="text" class="hori" name="email" value="{{ form.data.email }}"
+                <input class="box" type="text" class="hori" name="email" value="{{ form.data.email }}"
                        placeholder="Email">
                 {{ form.email.errors }}
             </p>
-            <input style="background-color: dimgrey; color: lightgrey" class="allign" type="submit">
+            <input class="submitButton" style="color: rgb(255, 255, 255)" class="allign" type="submit">
         </form>
     </div>
+</div>
 {% endblock %}
 
 
