@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<body id="sb">
+    <div class="sidebar">
+        <header id="titleText">Categories:</header>
+        
+        <a id = "catespace" href="{% url 'user_login' %}"><div class ="cateText">Games</div></a>
+        <a id = "catespace" href="{% url 'user_login' %}"><div class ="cateText">Laptop</div></a>
+        <a id = "catespace" href="{% url 'user_login' %}"><div class ="cateText">Mouse</div></a>
+        <a id = "catespace" href="{% url 'user_login' %}"><div class ="cateText">Keyboard</div></a>
+        <a id = "catespace" href="{% url 'user_login' %}"><div class ="cateText">Headphone</div></a>
+        
+    </div>
+</body>
+</html>
+
+<style scoped>
+#sb{
+    margin:0%;
+}
+.sidebar{
+    margin-top:-80%;
+    display:block;
+    margin-left:0px;
+    width:340px;
+    padding:40px;
+    background-color: rgb(9, 6, 49);
+    position:sticky;
+
+}
+
+#titleText{
+    text-decoration: underline;
+    font-size: 350%;
+    font-weight: bolder;
+    color:white;
+    margin-bottom:40px;
+}
+#catespace{
+    text-decoration: none;
+    margin:0px;
+}
+
+.cateText{
+    margin:0px;
+    font-size: 140%;
+    color: white;
+    padding:60px;
+}
+
+.cateText:hover{
+    font-size: 180%;
+    background-color: rgb(21, 21, 153);
+}
+
+
+
+
+</style>
