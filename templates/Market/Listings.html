@@ -1,0 +1,70 @@
+{% extends 'Market/Account.html' %}
+
+{% block style %}
+     <style>
+        .product {
+            border-style: inset;
+            text-align: center;
+            margin: 10px;
+            float: left
+        }
+    </style>
+{% endblock %}
+
+{% block body_plus %}
+    {# Im not sure which database we are using but #}
+    {% for listing in my_listing %}
+        <p id="product{{ listing.id }}">
+            product: {{ listing.product_name }}<br>
+            description: {{ listing.description }}<br>
+            price: {{ listing.price }}<br>
+
+            <button class="update" data-list="{{ listing.id }}" data-user="{{ request.session.username }}">update listing</button>
+            <button class="delete" data-list="{{ listing.id }}" data-user="{{ request.session.username }}">delete listing</button>
+        </p>
+    {% endfor %}
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('.delete').click(function() {
+            var listid = $(this).attr("data-list");
+            var user = $(this).attr("data-user");
+            console.log("I am here, check");
+            $.ajax({
+                type: "GET",
+                url: '{% url 'delete' %}',
+                data: {
+                    'prod_id': listid,
+                    'user': user,
+                },
+                success: function (response) {
+                    $('#product'+listid).remove();
+                    console.log("product"+listid);
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $('.update').click(function() {
+            var listid = $(this).attr("data-list");
+            var user = $(this).attr("data-user");
+            $.ajax({
+                type: "GET",
+                url: '{% url 'delete' %}',
+                data: {
+                    'prod_id': listid,
+                    'user': user,
+                },
+                success: function (response) {
+
+                }
+            });
+        });
+    </script>
+{% endblock %}
+

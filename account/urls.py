@@ -15,14 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from account import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 urlpatterns = [
     path('', views.index),
     path('login/', views.user_login, name='user_login'),
-    path('browse/', views.index, name='browse'),
+    path('home/', views.index, name='home'),
     path('register/', views.register, name='register'),
-    path('account/', views.my_account, name='my_account'),
     path('logout/', views.user_logout, name="user_logout"),
+
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+

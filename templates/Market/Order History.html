@@ -1,0 +1,12 @@
+{% extends 'Market/Account.html' %}
+
+{% block body_plus %}
+    {# Im not sure which database we are using but #}
+    {% for order in order_hist %}
+        <p>
+            product: {{ order.product_bought.product_name }} <br>
+            description: {{ order.product_bought.description }} <br>
+            price: {{ order.product_bought.price }} <br>
+        </p><br>
+    {% endfor %}
+{% endblock %}

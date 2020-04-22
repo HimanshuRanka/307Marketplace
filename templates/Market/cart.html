@@ -1,9 +1,52 @@
-{% extends 'account/../base.html' %}
+{% extends 'Market/Account.html' %}
 
-{% block body-block %}
-    {% for prod in cart_list %}
-        <div>
-            {# print out the product #}
-        </div>
+{% block style %}
+    <style>
+        .product {
+            border-style: inset;
+            text-align: center;
+            margin: 10px;
+            float: left
+        }
+    </style>
+{% endblock %}
+
+{% block body_plus %}
+    {# Im not sure which database we are using but #}
+    {% for cart in my_cart %}
+        <p id="product{{ cart.product.id }}">
+            product: {{ cart.product.product_name }}<br>
+            description: {{ cart.product.description }}<br>
+            price: {{ cart.product.price }}<br>
+            <button class="remove" data-user="{{ request.session.username }}" data-list="{{ cart.id }}" data-prod="{{ cart.product.id }}">remove</button>
+        </p><br>
     {% endfor %}
+    <a id="checkout" href="{% url 'checkout' %}">checkout</a>
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('.remove').click(function() {
+            var listid = $(this).attr("data-list");
+            var user = $(this).attr("data-user");
+            var prodid = $(this).attr("data-prod");
+            $.ajax({
+                type: "GET",
+                url: '{% url 'remove' %}',
+                data: {
+                    'cart_id': listid,
+                    'user': user,
+                },
+                success: function (response) {
+                    $('#product'+prodid).remove();
+                    console.log("product"+prodid);
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+            });
+        });
+    </script>
+
 {% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'Market/Account.html' %}
+
+{% block style %}
+    <style>
+        .product {
+            border-style: inset;
+            text-align: center;
+            margin: 10px;
+            float: left
+        }
+    </style>
+{% endblock %}
+
+{% block body_plus %}
+    {# Im not sure which database we are using but #}
+    {% for cart in cart_list %}
+        <p class="product">
+            product: {{ cart.product.product_name }}<br>
+            description: {{ cart.product.description }}<br>
+            price: {{ cart.product.price }}<br>
+            stock: {{ cart.product.stock }}<br>
+        </p>
+    {% endfor %}
+    <p>Total : {{ sum }}</p>
+    <br>
+    <br>
+    <br>
+    Shipping address:
+    <div id="addr">
+        <form id="address" method="post" action="">
+            {% csrf_token %}
+            <p><input type="text" name="line_one" placeholder="Address Line 1"> {{ form.line_one.errors }} </p><br>
+            <p><input type="text" name="line_two" placeholder="Address Line 2"> {{ form.line_two.errors }}</p><br>
+            <p><input type="text" name="city" placeholder="City"> {{ form.city.errors }}</p><br>
+            <p><input type="text" name="province" placeholder="Province"> {{ form.province.errors }}</p><br>
+            <p><input type="text" name="Country" placeholder="Country"> {{ form.Country.errors }}</p><br>
+            <p><input type="text" name="Zipcode" placeholder="Zip Code"> {{ form.Zipcode.errors }}</p><br>
+            <p><input type="hidden" name="user" value="{{ request.session.username }}"></p>
+            <p><input type="submit"></p>
+        </form>
+    </div>
+    <br><button class="buy" data-user="{{ request.session.username }}">buy</button>
+
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        $('.buy').click(function () {
+            var user = $(this).attr("data-user");
+            $.ajax({
+                type: "GET",
+                url: '{% url 'buy' %}',
+                data: {
+                    'user': user,
+                },
+                success: function () {
+                    $('#addr').replaceWith('<p style="color: GREEN">ORDER HAS BEEN PLACED</p>')
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $('#address').submit(function (e) {
+            e.preventDefault();
+            var serialisedData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'address' %}",
+                data: serialisedData,
+                success: function (response) {
+                    var instance = JSON.parse(response["instance"]);
+                    var fields = instance[0]["fields"];
+                    $('#addr').html(fields["line_one"] + ", " +fields["line_two"] +
+                    ", " + fields["city"] + ", " + fields["province"] + ", " + fields["Country"]
+                    + ", " + fields["Zipcode"]).append("<br><button class=\"buy\" data-user=\"{{ request.session.username }}\">lol</button>");
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+    </script>
+{% endblock %}

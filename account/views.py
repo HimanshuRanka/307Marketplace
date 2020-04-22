@@ -5,13 +5,17 @@ from django.db import IntegrityError
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
+
+from Market.models import Product
 from . import forms
 
 
 # should use generics but have not learned that yet. Also need to build the back end data structs
 
 def index(request):
-    return render(request, 'account/browse.html')
+    products = Product.objects.all().order_by('-pub_date')[:20]
+    context = {'products': products}
+    return render(request, 'account/browse.html', context)
 
 
 def register(request):
@@ -26,6 +30,7 @@ def register(request):
                     password=form.cleaned_data['password'])
                 user.first_name = form.cleaned_data['first_name']
                 user.last_name = form.cleaned_data['last_name']
+                user.save()
                 return HttpResponseRedirect(reverse('user_login'))
             except IntegrityError:
                 form.add_error('username', 'Username is taken')
@@ -45,9 +50,12 @@ def user_login(request):
             if user is not None:
                 login(request, user)
                 request.session['username'] = form.cleaned_data['username']
+                request.session['email'] = user.email
+                request.session['first_name'] = user.first_name
+                request.session['last_name'] = user.last_name
                 if 'next' in request.GET:
                     return HttpResponseRedirect(request.GET['next'])
-                return HttpResponseRedirect(reverse('browse'))
+                return HttpResponseRedirect(reverse('home'))
             else:
                 form.add_error(None, 'Unable to log in')
         context['form'] = form
@@ -58,7 +66,3 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('user_login'))
 
-
-@login_required
-def my_account(request):
-    return render(request, 'account/Account.html')
