@@ -21,8 +21,8 @@ class RegisterForm(forms.Form):
         validators=[validate_mcgill_email],
         error_messages={'not_mcgill': 'mcgill members only'})
 
-    password = forms.CharField()
-    password_confirm = forms.CharField()
+    password = forms.CharField(max_length=30)
+    password_confirm = forms.CharField(max_length=30)
     first_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30, required=False)
 

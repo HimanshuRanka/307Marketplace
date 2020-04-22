@@ -10,8 +10,6 @@ def get_upload_path(instance, filename):
 
 
 class Product(models.Model):
-    # Not sure about the user attribute as
-    # I havent looked into models as much so am not sure about the relationshi
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=50)
     # product_picture = models.ImageField(upload_to=get_upload_path)
@@ -19,6 +17,7 @@ class Product(models.Model):
     price = models.IntegerField()
     stock = models.IntegerField()
     pub_date = models.DateTimeField('date published', default=timezone.now)
+
 
 
 # dont really need the user class as its predefined
@@ -47,3 +46,4 @@ class Address(models.Model):
     province = models.CharField(max_length=30, default='QC')
     Country = models.CharField(max_length=30, default='Canada', blank=True)
     Zipcode = models.CharField(max_length=10, default='H1H 1H1')
+
