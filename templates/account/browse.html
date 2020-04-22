@@ -1,14 +1,28 @@
-{% include 'account/../base.html' %}
-{% include 'account/../sidebar.html' %}
 
 {% block style %}
     {# This is for any additional style. We could look into using css files, but for now this works #}
-{% endblock %}
+
+    <style>
+    .cards{
+        margin: 0px;
+        padding:0px;
+    }
+    </style>
+    {% endblock %}
 {% block body-block %}
+{% include 'account/../base.html' %}
+{% include 'account/../sidebar.html' %}
+
+<div class="cards">
+{% include 'account/../itemcard.html' %}
+{% include 'account/../itemcard.html' %}
+{% include 'account/../itemcard.html' %}
+{% include 'account/../itemcard.html' %}
+
+</div>
 
 {% load static %}
-<link rel="stylesheet"
-    type="text/css" href="{% static 'addIMG/banner.css' %}">
+
     {# This is the browse page, I have not gcome around to adding anything here #}
     {# What ever code would go into a <body></body> would go here #}
     {# I think, if u need to add anything outside body, just go ahead and add it. #}

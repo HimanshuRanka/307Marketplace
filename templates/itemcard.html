@@ -1,26 +1,8 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<div class="itemcardpage">
-<a class="itemcard" href="http://www.google.com"> 
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
-<div> pic </div>
+<a id="itemcard" href="http://www.google.com"> 
+<div id="picreplace"> </div>
 
 <div class="itemtextarea">
 <div id="itemtitle"> name of item rqgq</div>
@@ -29,16 +11,16 @@
 <div id="itemdes">THIS IS THE ITEM DESCRIPTION THIS IS THE ITEM DESCRIPTION THIS IS THE ITEM DESCRIPTION</div>
 <div id="itemleft"> 20 left in stock</div>
 </div>
+
 </a>
-</div>
 </html>
 
 <style scoped> 
-.itemcardpage{
-    display: block;
-}
 
-.itemcard{
+
+
+#itemcard{
+    margin:0px;
     height:550px;
     width:400px;
     display: flex;
@@ -48,13 +30,21 @@
     background-color: rgb(243, 243, 243)
 }
 
-.itemcard:hover{
-    background-color: rgb(207, 207, 207);
+#itemcard:hover{
+    background-color: rgb(155, 152, 152);
+}
+
+#picreplace{
+    width: 400px;
+    height: 400px;
+    background-color: aqua;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 #itemtitle{
     text-decoration: underline;
-    font-size: 200%;
+    font-size: 32px;
     font-weight: 700;
     margin-left: 10px;
     margin-right:10px;
@@ -63,7 +53,7 @@
 }
 
 #itemrating{
-    font-size: 130%;
+    font-size: 21px;
     margin-left: 10px;
     margin-right:10px;
     font-weight: 600;
@@ -71,7 +61,7 @@
 }
 
 #itemprice{
-    font-size :130%;
+    font-size :21px;
     margin-left:10px;
     margin-right:10px;
     margin-bottom:10px;
@@ -83,7 +73,7 @@
 
 #itemdes{
     height:60px;
-    font-size :110%;
+    font-size :18px;
     margin-left:10px;
     margin-right:10px;
     margin-bottom:10px;
@@ -91,7 +81,7 @@
 }
 
 #itemleft{
-    font-size:120%;
+    font-size:21px;
     margin-left:10px;
     margin-right:10px;
     margin-bottom: 10px;
