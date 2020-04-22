@@ -31,15 +31,11 @@
 {% endblock %}
 {% block body-block %}
 <div class="center">
-    <form method="post" action="">
+    <form method="post" action="{% url 'new_product' %}">
         {% csrf_token %}
         <p>
-            <input type="text" class="allign" name="product" placeholder="Product Title" value="{{ form.data.product }}">
-            {{ form.product.errors }}
-        </p>
-        <p>
-            <input type="image" class="allign" name="product_picture" placeholder="image" value="{{ form.data.product_picture }}">
-            {{ form.product_picture.errors }}
+            <input type="text" class="allign" name="product_name" placeholder="Product Title" value="{{ form.data.product_name }}">
+            {{ form.product_name.errors }}
         </p>
         <p>
             <input type="text" class="allign" name="description" placeholder="Description" value="{{ form.data.description }}"

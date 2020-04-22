@@ -1,11 +1,33 @@
 {% extends 'account/../base.html' %}
-
+{% block style %}
+    <style>
+    .details{
+        margin: auto;
+        width: 40%;
+        text-align: center;
+        border-style: inset;
+        padding: 30px;
+    }
+    </style>
+{% endblock %}
 {% block body-block %}
     <div class="header">
-            <a href="{% url 'cart' %}">My Listings</a>
-            <a href="{% url 'cart' %}">Order History</a>
-            <a href="{% url 'cart' %}">Browse</a>
-            <a href="{% url 'cart' %}">Account Details</a>
+            <a href="{% url 'my_listings' %}">My Listings</a>
+            <a href="{% url 'order_history' %}">Order History</a>
+            <a href="{% url 'home' %}">Browse</a>
+            <a href="{% url 'my_account' %}">Account Details</a>
+            <a href="{% url 'new_product' %}">New Listing</a>
+    </div>
+{% endblock %}
+
+{% block body_plus %}
+    <div class="details">
+        <p>
+            Username: {{ request.session.username }}<br>
+            Password: ********<br>
+            Name: {{ request.session.first_name }} {{ request.session.last_name }}<br>
+            Email: {{ request.session.email }}<br>
+        </p>
     </div>
 {% endblock %}
 

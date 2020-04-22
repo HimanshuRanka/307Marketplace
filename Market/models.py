@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-
 # Create your models here.
+from django.utils import timezone
 
 
 def get_upload_path(instance, filename):
@@ -13,24 +13,37 @@ class Product(models.Model):
     # Not sure about the user attribute as
     # I havent looked into models as much so am not sure about the relationshi
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.CharField(max_length = 50)
-    product_picture = models.ImageField(upload_to=get_upload_path)
-    description = models.CharField(max_length = 50)
+    product_name = models.CharField(max_length=50)
+    # product_picture = models.ImageField(upload_to=get_upload_path)
+    description = models.CharField(max_length=50)
     price = models.IntegerField()
     stock = models.IntegerField()
+    pub_date = models.DateTimeField('date published', default=timezone.now)
 
 
-class User(models.Model):
-	first_name = models.CharField(max_length = 20)
-	last_name = models.CharField(max_length = 20)
-	username = models.CharField(max_length = 40)
-	password = models.CharField(max_length = 40)
-	email = models.CharField(max_length = 40)
-
+# dont really need the user class as its predefined
+# I assume this is order history
 class Purchase(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product_bought = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+
+class Listing(models.Model):
+    seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField('date published')
+
+
+class Cart(models.Model):
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
 
 class Address(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	address = models.CharField(max_length = 100)
+    user = models.CharField(max_length=100, default=' ')
+    line_one = models.CharField(max_length=100, default=' ')
+    line_two = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=30, default='Montreal')
+    province = models.CharField(max_length=30, default='QC')
+    Country = models.CharField(max_length=30, default='Canada', blank=True)
+    Zipcode = models.CharField(max_length=10, default='H1H 1H1')

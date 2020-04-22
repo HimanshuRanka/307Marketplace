@@ -18,11 +18,12 @@ from django.urls import path
 
 from account import views
 
+
 urlpatterns = [
     path('', views.index),
     path('login/', views.user_login, name='user_login'),
-    path('browse/', views.index, name='browse'),
+    path('home/', views.index, name='home'),
     path('register/', views.register, name='register'),
-    path('account/', views.my_account, name='my_account'),
     path('logout/', views.user_logout, name="user_logout"),
+
 ]

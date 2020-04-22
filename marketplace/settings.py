@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account',
-    'Market',
+    'Market.apps.MarketConfig',
+    'account.apps.AccountConfig',
+    'dajax',
+    'dajaxice',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +71,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'marketplace.wsgi.application'
 
