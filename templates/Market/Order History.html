@@ -4,9 +4,10 @@
     {# Im not sure which database we are using but #}
     {% for order in order_hist %}
         <p>
-            product: {{ order.product_bought.product_name }} <br>
-            description: {{ order.product_bought.description }} <br>
-            price: {{ order.product_bought.price }} <br>
+            product: {{ order.product_name }} <br>
+            description: {{ order.description }} <br>
+            price: {{ order.price }} <br>
+            quantity: {{ order.quantity }}<br>
         </p><br>
     {% endfor %}
 {% endblock %}

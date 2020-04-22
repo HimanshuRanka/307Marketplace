@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Market.apps.MarketConfig',
     'account.apps.AccountConfig',
-#	'channels',
 ]
 
 MIDDLEWARE = [

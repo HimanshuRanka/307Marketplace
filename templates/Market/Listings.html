@@ -18,6 +18,7 @@
             product: {{ listing.product_name }}<br>
             description: {{ listing.description }}<br>
             price: {{ listing.price }}<br>
+            stock: {{ listing.stock }}<br>
             <button class="delete" data-list="{{ listing.id }}" data-user="{{ request.session.username }}">delete listing</button>
         </p>
         <form id="form{{ listing.id }}" method="get" action="{% url 'update' %}">

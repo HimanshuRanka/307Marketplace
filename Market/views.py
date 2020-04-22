@@ -61,8 +61,14 @@ def add_to_cart(request):
     product = Product.objects.get(pk=product_id)
     product.stock = product.stock - 1
     product.save()
-    cart_obj = Cart.objects.create(buyer=user, product=product)
-    cart_obj.save()
+    if product.cart_set.all().count() < 1:
+        cart_obj = Cart.objects.create(buyer=user, product=product)
+        cart_obj.quantity = 1
+        cart_obj.save()
+    else:
+        cart_obj = Cart.objects.get(product=product)
+        cart_obj.quantity = cart_obj.quantity + 1
+        cart_obj.save()
     ser_prod = serializers.serialize('json', [product, ])
     return JsonResponse({"prod": ser_prod}, status=200)
 
@@ -85,15 +91,19 @@ def remove(request):
 
     return JsonResponse({"valid": True}, status=200)
 
+
 @login_required
 def checkout(request):
     user = User.objects.get(username=request.session['username'])
     cart_list = user.cart_set.all()
-    sum = 0
+    total = 0
     for cart_obj in cart_list:
-        sum = sum + cart_obj.product.price
+        quan = cart_obj.quantity
+        while quan > 0:
+            total = total + cart_obj.product.price
+            quan = quan - 1
 
-    context = {'sum': sum, 'cart_list': cart_list}
+    context = {'sum': total, 'cart_list': cart_list}
     return render(request, 'Market/checkout.html', context)
 
 
@@ -103,11 +113,21 @@ def buy(request):
     user = User.objects.get(username=username)
     cart_list = user.cart_set.all()
     for cart_obj in cart_list:
-        pur = Purchase.objects.create(user=cart_obj.buyer, product_bought=cart_obj.product)
-        pur.save()
+        product = cart_obj.product
+        if product.purchase_set.all().count() < 1 or product.changed:
+            pur = Purchase.objects.create(user=cart_obj.buyer)
+            pur.product_name = product.product_name
+            pur.description = product.description
+            pur.price = product.price
+            pur.quantity = cart_obj.quantity
+            pur.save()
+        else:
+            pur = Purchase.objects.get(product_name=product.name)
+            pur.quantity = pur.quantity + cart_obj.quantity
+            pur.save()
         cart_obj.delete()
-    print(sum)
     return JsonResponse({"valid": True}, status=200)
+
 
 @login_required
 def address(request):
@@ -119,16 +139,17 @@ def address(request):
     else:
         return JsonResponse({"error": form.errors}, status=400)
 
+
 def update(request):
     context = {}
     if request.method == 'POST':
         form = UpdateProductForm(request.POST)
         if form.is_valid():
             prod = Product.objects.get(pk=form.data['prodid'])
-            prod.product_name = form.data['product_name']
             prod.description = form.data['description']
             prod.price = form.data['price']
             prod.stock = form.data['stock']
+            prod.changed = True
             prod.save()
             return HttpResponseRedirect(reverse('my_listings'))
         else:

@@ -17,23 +17,26 @@ class Product(models.Model):
     price = models.IntegerField()
     stock = models.IntegerField()
     pub_date = models.DateTimeField('date published', default=timezone.now)
-
+    changed = models.BooleanField(default=False)
 
 class Purchase(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product_bought = models.ForeignKey(Product, on_delete=models.CASCADE)
-
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    product_name = models.CharField(max_length=50, default="Name Missing")
+    # product_picture = models.ImageField(upload_to=get_upload_path)
+    description = models.CharField(max_length=50, default="No Description")
+    price = models.IntegerField(default=0)
+    quantity = models.IntegerField(default=1)
 
 class Listing(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date published')
 
-
 class Cart(models.Model):
     buyer = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-
+    quantity = models.IntegerField(default=1)
 
 class Address(models.Model):
     user = models.CharField(max_length=100, default=' ')
