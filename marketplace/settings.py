@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	'channels',
     'account',
     'Market',
 ]
@@ -72,7 +73,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'marketplace.wsgi.application'
 
+ASGI_APPLICATION = 'marketplace.routing.application'
 
+CHANNEL_LAYERS = {
+	'default': {
+		'BACKEND': 'channels_redis.core.RedisChannelLayer',
+		'CONFIG': {
+			"hosts": [('127.0.0.1', 6379)],
+		},
+	},
+}
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 

@@ -54,7 +54,7 @@ def user_login(request):
     return render(request, 'account/login.html', context)
 
 
-def user_logout(request):
+def user_logout(request):	
     logout(request)
     return HttpResponseRedirect(reverse('user_login'))
 
