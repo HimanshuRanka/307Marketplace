@@ -47,3 +47,4 @@ class Address(models.Model):
     Country = models.CharField(max_length=30, default='Canada', blank=True)
     Zipcode = models.CharField(max_length=10, default='H1H 1H1')
 
+

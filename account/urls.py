@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from account import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -27,3 +27,6 @@ urlpatterns = [
     path('logout/', views.user_logout, name="user_logout"),
 
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+

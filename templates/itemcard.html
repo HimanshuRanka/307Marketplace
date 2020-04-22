@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<a id="itemcard" href="http://www.google.com"> 
+<img id="picreplace" src="{% static '/image/mouse.png'%}">
+
+<div class="itemtextarea">
+<div id="itemtitle"> Gaming Mouse</div>
+<div id="itemrating"> rating: 1  </div>
+<div id="itemprice"> price: $54</div>
+<div id="itemdes">He s not very good at games</div>
+<div id="itemleft"> 20 left in stock</div>
+</div>
+
+</a>
+</html>
+
+<style scoped> 
+
+
+
+#itemcard{
+    margin:0px;
+    height:550px;
+    width:400px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color:black;
+    background-color: rgb(243, 243, 243)
+}
+
+#itemcard:hover{
+    background-color: rgb(155, 152, 152);
+}
+
+#picreplace{
+    width: 400px;
+    height: 400px;
+    background-color: aqua;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#itemtitle{
+    text-decoration: underline;
+    font-size: 32px;
+    font-weight: 700;
+    margin-left: 10px;
+    margin-right:10px;
+    height:38px;
+    overflow: hidden;
+}
+
+#itemrating{
+    font-size: 21px;
+    margin-left: 10px;
+    margin-right:10px;
+    font-weight: 600;
+    color:rgb(204, 173, 0);
+}
+
+#itemprice{
+    font-size :21px;
+    margin-left:10px;
+    margin-right:10px;
+    margin-bottom:10px;
+    font-weight: 600;
+    color:rgb(101, 101, 240);
+}
+
+
+
+#itemdes{
+    height:60px;
+    font-size :18px;
+    margin-left:10px;
+    margin-right:10px;
+    margin-bottom:10px;
+    overflow: hidden;
+}
+
+#itemleft{
+    font-size:21px;
+    margin-left:10px;
+    margin-right:10px;
+    margin-bottom: 10px;
+    font-weight:600;
+    height:20px;
+    overflow: hidden;
+    color:rgb(236, 118, 118);
+}
+</style>

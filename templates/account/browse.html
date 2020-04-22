@@ -1,5 +1,6 @@
-{% extends 'account/../base.html' %}
+
 {% block style %}
+<<<<<<< HEAD
     <style>
         .product {
             border-style: inset;
@@ -10,7 +11,28 @@
     </style>
 
 {% endblock %}
+=======
+    {# This is for any additional style. We could look into using css files, but for now this works #}
+
+    <style>
+    .cards{
+        margin: 0px;
+        padding:0px;
+    }
+    </style>
+    {% endblock %}
+>>>>>>> deaee4962ab134a126b795c24fef17eeb6f47953
 {% block body-block %}
+{% include 'account/../base.html' %}
+{% include 'account/../sidebar.html' %}
+
+<div class="cards">
+{% include 'account/../itemcard.html' %}
+{% include 'account/../itemcard.html' %}
+{% include 'account/../itemcard.html' %}
+{% include 'account/../itemcard.html' %}
+
+</div>
 
     {% load static %}
     <img id='banner' src="banner.jpg" alt="aa">
