@@ -2,11 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core import serializers
 from django.db.models import F
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from Market.forms import NewProductForm, AddressForm
+from django.urls import reverse
+
+from Market.forms import NewProductForm, AddressForm, UpdateProductForm
 from Market.models import Product, Listing, Purchase, Cart
 
 
@@ -19,6 +21,7 @@ def add_product(request):
             prod = form.save(commit=False)
             prod.owner = request.user
             prod.save()
+            return HttpResponseRedirect(reverse('my_listings'))
         context['form'] = form
     return render(request, 'Market/new_product.html', context)
 
@@ -115,3 +118,24 @@ def address(request):
         return JsonResponse({"instance": ser_instance}, status=200)
     else:
         return JsonResponse({"error": form.errors}, status=400)
+
+def update(request):
+    context = {}
+    if request.method == 'POST':
+        form = UpdateProductForm(request.POST)
+        if form.is_valid():
+            prod = Product.objects.get(pk=form.data['prodid'])
+            prod.product_name = form.data['product_name']
+            prod.description = form.data['description']
+            prod.price = form.data['price']
+            prod.stock = form.data['stock']
+            prod.save()
+            return HttpResponseRedirect(reverse('my_listings'))
+        else:
+            context['prodid'] = form.cleaned_data['prodid']
+            context['form'] = form
+            return render(request, 'Market/update.html', context)
+    prod = Product.objects.get(pk=request.GET.get('prodid'))
+    context['prodid'] = prod.id
+    context['prod'] = prod.product_name
+    return render(request, 'Market/update.html', context)

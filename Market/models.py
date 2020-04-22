@@ -19,9 +19,6 @@ class Product(models.Model):
     pub_date = models.DateTimeField('date published', default=timezone.now)
 
 
-
-# dont really need the user class as its predefined
-# I assume this is order history
 class Purchase(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product_bought = models.ForeignKey(Product, on_delete=models.CASCADE)

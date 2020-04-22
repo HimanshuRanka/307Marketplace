@@ -1,0 +1,58 @@
+{% extends 'account/../base.html' %}
+{% block style %}
+<style>
+    .center {
+        margin: auto;
+        width: 40%;
+        text-align: center;
+    }
+
+    h1 {
+        padding: 10px;
+    }
+
+    div {
+        border-style: inset;
+        padding: 30px;
+    }
+
+    input {
+        margin: auto;
+        width: 70%;
+        text-align: center;
+        border-style: groove;
+        border-color: darkgray;
+        margin-bottom: 5px;
+        height: 20px;
+
+    }
+    </style>
+{% endblock %}
+{% block body-block %}
+<div class="center">
+    Update Information:
+    <form method="post" action="{% url 'update' %}">
+        {% csrf_token %}
+        <p>
+            <input type="text" class="allign" name="product_name" placeholder="Product Title" value="{{ prod.product_name }}">
+            {{ form.product_name.errors }}
+        </p>
+        <p>
+            <input type="text" class="allign" name="description" placeholder="Description" value="{{ prod.description }}"
+            {{ form.description.errors }}
+        </p>
+        <p>
+            <input type="number" class="allign" name="price" placeholder="Price" value="{{ prod.price }}">
+            {{ form.price.errors }}
+        </p>
+        <p>
+            <input type="number" class="allign" name="stock" placeholder="Stock" value="{{ prod.stock }}">
+            {{ form.stock.errors }}
+        </p>
+        <input type="hidden" name="prodid" value="{{ prodid }}">
+        <input class="allign" type="submit">
+
+    </form>
+
+</div>
+{% endblock %}

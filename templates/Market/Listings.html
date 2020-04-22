@@ -18,10 +18,12 @@
             product: {{ listing.product_name }}<br>
             description: {{ listing.description }}<br>
             price: {{ listing.price }}<br>
-
-            <button class="update" data-list="{{ listing.id }}" data-user="{{ request.session.username }}">update listing</button>
             <button class="delete" data-list="{{ listing.id }}" data-user="{{ request.session.username }}">delete listing</button>
         </p>
+        <form id="form{{ listing.id }}" method="get" action="{% url 'update' %}">
+                <input type="hidden" name="prodid" value="{{ listing.id }}">
+                <input type="submit" value="update listing">
+        </form>
     {% endfor %}
 {% endblock %}
 
@@ -41,6 +43,7 @@
                 },
                 success: function (response) {
                     $('#product'+listid).remove();
+                    $('#form'+listid).remove();
                     console.log("product"+listid);
                 },
                 error: function (response) {
@@ -49,22 +52,6 @@
             });
         });
     </script>
-    <script type="text/javascript">
-        $('.update').click(function() {
-            var listid = $(this).attr("data-list");
-            var user = $(this).attr("data-user");
-            $.ajax({
-                type: "GET",
-                url: '{% url 'delete' %}',
-                data: {
-                    'prod_id': listid,
-                    'user': user,
-                },
-                success: function (response) {
 
-                }
-            });
-        });
-    </script>
 {% endblock %}
 

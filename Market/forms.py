@@ -12,7 +12,17 @@ class NewProductForm(ModelForm):
 class AddressForm(ModelForm):
     line_two = forms.CharField(required=False)
     Country = forms.CharField(required=False)
+
     class Meta:
         model = Address
         fields = ['line_one', 'line_two', 'city', 'province', 'Country', 'Zipcode', 'user']
         widgets = {'user': forms.HiddenInput()}
+
+
+class UpdateProductForm(forms.Form):
+    prodid = forms.IntegerField()
+
+    class Meta:
+        model = Product
+        fields = ['product_name', 'description', 'price', 'stock', 'prodid']
+        widgets = {'prodid': forms.HiddenInput()}

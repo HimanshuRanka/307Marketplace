@@ -72,7 +72,7 @@
                     var fields = instance[0]["fields"];
                     $('#addr').html(fields["line_one"] + ", " +fields["line_two"] +
                     ", " + fields["city"] + ", " + fields["province"] + ", " + fields["Country"]
-                    + ", " + fields["Zipcode"]).append("<br><button class=\"buy\" data-user=\"{{ request.session.username }}\">lol</button>");
+                    + ", " + fields["Zipcode"])
                 },
                 error: function (response) {
                     console.log(response);
