@@ -8,24 +8,83 @@
             margin: 10px;
             float: left
         }
+        .listingitem{
+            display: flex;
+            flex-direction: row;
+            margin:20px;
+            border:solid 1px;
+            padding:30px;
+            background-color: antiquewhite;
+            min-width: 1400px;
+        }
+        #listingfield{
+            font-weight:600;
+            margin:20px;
+        }
+        #listingvalue{
+            font-weight:500;
+        }
+        .listingtext{
+            font-size:40px;
+            width:1000px;
+        }
+        #listingbuttons{
+            margin-left: 900px;
+            align-self: center;
+        }
+        .delete{
+            width:200px;
+            height:100px;
+            margin:20px;
+            border:none;
+            background-color:black;
+            color:white;
+            font-size:28px;
+            font-weight: 600;
+        }
+        .delete:hover{
+            background-color:rgb(141, 107, 62) ;
+            cursor: pointer;
+        }
+        .update{
+            width:200px;
+            height:100px; 
+            margin:20px;
+            border:none;
+            background-color:black;
+            color:white;
+            font-size:28px;
+            font-weight: 600;
+        }
+        .update:hover{
+            background-color:rgb(141, 107, 62) ;
+            cursor: pointer;
+        }
     </style>
 {% endblock %}
 
+
 {% block body_plus %}
-    {# Im not sure which database we are using but #}
+<div class="listingpage">
     {% for listing in my_listing %}
-        <p id="product{{ listing.id }}">
-            product: {{ listing.product_name }}<br>
-            description: {{ listing.description }}<br>
-            price: {{ listing.price }}<br>
-            stock: {{ listing.stock }}<br>
+        <div class="listingitem" id="product{{ listing.id }}">
+            <div class="listingtext">
+                <div id="listingfield"> product name: <span id="listingvalue"> {{ listing.product_name }}</span></div>
+                <div id="listingfield"> description: <span id="listingvalue"> {{ listing.description }}</span></div>
+                <div id="listingfield"> price: $<span id="listingvalue">{{ listing.price }}</span></div>
+                <div id="listingfield"> stock: <span id="listingvalue">{{ listing.stock }}</span></div>
+            </div>
+            <div id="listingbuttons">
             <button class="delete" data-list="{{ listing.id }}" data-user="{{ request.session.username }}">delete listing</button>
-        </p>
         <form id="form{{ listing.id }}" method="get" action="{% url 'update' %}">
                 <input type="hidden" name="prodid" value="{{ listing.id }}">
-                <input type="submit" value="update listing">
+                <input class="update" type="submit" value="update listing">
         </form>
+    </div>
+    </div>
+
     {% endfor %}
+</div>
 {% endblock %}
 
 {% block javascript %}
