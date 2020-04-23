@@ -1,27 +1,45 @@
 {% load static %}
+{% static "item_pics" as baseUrl  %}
 <!DOCTYPE html>
-
 <html lang="en">
-<a id="itemcard" href="http://www.google.com"> 
-<img id="picreplace" src="{% static '/image/mouse.png'%}">
+<div id="itemPage">
+{% for product in products %}
 
+<a id="itemcard" href="http://www.google.com"> 
+ <img id="picreplace" src="{{baseUrl}}/{{product.product_picture}}">
 <div class="itemtextarea">
-<div id="itemtitle"> Gaming Mouse</div>
-<div id="itemrating"> rating: 1  </div>
-<div id="itemprice"> price: $54</div>
-<div id="itemdes">He s not very good at games</div>
-<div id="itemleft"> 20 left in stock</div>
+<div id="itemtitle"> {{product.product_name}}</div>
+<div id="itemrating"> rating: {{product.product_rating}} </div>
+<div id="itemprice"> price: ${{product.price}}</div>
+<div id="itemdes">{{product.description}}</div>
+<div id="test"></div>
+
+{% if product.stock > 0 %}
+<div id="itemleft"> {{product.stock}} left in stock</div>
+<button class="addproduct" id="addprod{{ product.id }}" data-stock="{{ product.stock }}" data-catid="{{ product.id }}" data-user="{{ request.session.username }}">add to cart</button>
+{% else %}
+<span style="color: red"><div id="itemleft"> out of stock </div>
+</span>
+{% endif %}
 </div>
 
 </a>
+
+{% endfor %}
+</div>
 </html>
-
 <style scoped> 
-
-
+#itemPage{
+    width:80%;
+    margin-top: -1200px;
+    margin-left: 500px;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
 
 #itemcard{
-    margin:0px;
+    margin:20px;
     height:550px;
     width:400px;
     display: flex;
@@ -37,7 +55,7 @@
 
 #picreplace{
     width: 400px;
-    height: 400px;
+    height: 370px;
     background-color: aqua;
     margin-left:auto;
     margin-right:auto;
@@ -73,7 +91,7 @@
 
 
 #itemdes{
-    height:60px;
+    height:40px;
     font-size :18px;
     margin-left:10px;
     margin-right:10px;
@@ -92,3 +110,38 @@
     color:rgb(236, 118, 118);
 }
 </style>
+
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $('.addproduct').click(function() {
+            var catid = $(this).attr("data-catid");
+            var user = $(this).attr("data-user");
+            var stock = $(this).attr("data-stock");
+            $.ajax({
+                type: "GET",
+                url: "{% url 'add' %}",
+                data: {
+                    'prod_id': catid,
+                    'username': user,
+                },
+                success: function (response) {
+                    console.log(response);
+                    var instance = JSON.parse(response["prod"]);
+                    var fields = instance[0]["fields"];
+                    console.log(fields['stock']);
+                    if(fields['stock'] < 1){
+                        $('#addprod'+catid).replaceWith('<span style="color: red">OUT OF STOCK</span>');
+                        $('#span'+catid).remove();
+                    }
+                },
+                error: function (response){
+                    console.log(response);
+                }
+            });
+        });
+    </script>
+
+
+{% endblock %}
