@@ -5,26 +5,30 @@
 <div id="itemPage">
 {% for product in products %}
 
+<div id="wholecard">
 <a id="itemcard" href="http://www.google.com"> 
- <img id="picreplace" src="{{baseUrl}}/{{product.product_picture}}">
+<img id="picreplace" src="{{baseUrl}}/{{product.product_picture}}">
 <div class="itemtextarea">
 <div id="itemtitle"> {{product.product_name}}</div>
 <div id="itemrating"> rating: {{product.product_rating}} </div>
 <div id="itemprice"> price: ${{product.price}}</div>
 <div id="itemdes">{{product.description}}</div>
-<div id="test"></div>
 
 {% if product.stock > 0 %}
 <div id="itemleft"> {{product.stock}} left in stock</div>
-<button class="addproduct" id="addprod{{ product.id }}" data-stock="{{ product.stock }}" data-catid="{{ product.id }}" data-user="{{ request.session.username }}">add to cart</button>
 {% else %}
 <span style="color: red"><div id="itemleft"> out of stock </div>
 </span>
 {% endif %}
 </div>
-
 </a>
 
+{% if product.stock > 0 %}
+<button class="addproduct" id="addprod{{ product.id }}" data-stock="{{ product.stock }}" data-catid="{{ product.id }}" data-user="{{ request.session.username }}">add to cart</button>
+{% endif %}
+
+
+</div>
 {% endfor %}
 </div>
 </html>
@@ -38,8 +42,16 @@
     flex-direction: row;
 }
 
+#wholecard{
+    display:flex;
+    flex-direction: column;
+    margin-bottom:40px;
+    margin-right:40px;
+}
+
 #itemcard{
     margin:20px;
+    margin-bottom:80px;
     height:550px;
     width:400px;
     display: flex;
@@ -109,6 +121,25 @@
     overflow: hidden;
     color:rgb(236, 118, 118);
 }
+
+.addproduct{
+    width: 150px;
+    height: 80px;
+    align-self: center;
+    margin-top:-50px;
+    background-color: black;
+    color:white;
+    border:none;
+    font-weight:600;
+    font-size:23px;
+}
+
+.addproduct:hover{
+    cursor: pointer;
+    background-color: rgb(80, 97, 151);
+    color:beige;
+}
+
 </style>
 
 {% block javascript %}
