@@ -48,7 +48,7 @@
             var user = $(this).attr("data-user");
             $.ajax({
                 type: "GET",
-                url: '{% url 'buy' %}',
+                url: "{% url 'buy' %}",
                 data: {
                     'user': user,
                 },

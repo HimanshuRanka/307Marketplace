@@ -16,6 +16,7 @@
             padding:30px;
             background-color: antiquewhite;
             min-width: 1400px;
+            width:90%;
         }
         #listingfield{
             font-weight:600;
@@ -60,11 +61,16 @@
             background-color:rgb(141, 107, 62) ;
             cursor: pointer;
         }
+        h1{
+            font-size:60px;
+            margin-left:20px;
+        }
     </style>
 {% endblock %}
 
 
 {% block body_plus %}
+<h1>My Listings:</h1>
 <div class="listingpage">
     {% for listing in my_listing %}
         <div class="listingitem" id="product{{ listing.id }}">
