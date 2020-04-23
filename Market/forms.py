@@ -24,5 +24,5 @@ class UpdateProductForm(forms.Form):
 
     class Meta:
         model = Product
-        fields = ['product_name', 'description', 'price', 'stock', 'prodid']
+        fields = ['description', 'price', 'stock', 'prodid']
         widgets = {'prodid': forms.HiddenInput()}

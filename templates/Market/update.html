@@ -34,19 +34,15 @@
     <form method="post" action="{% url 'update' %}">
         {% csrf_token %}
         <p>
-            <input type="text" class="allign" name="product_name" placeholder="Product Title" value="{{ prod.product_name }}">
-            {{ form.product_name.errors }}
-        </p>
-        <p>
             <input type="text" class="allign" name="description" placeholder="Description" value="{{ prod.description }}"
             {{ form.description.errors }}
         </p>
         <p>
-            <input type="number" class="allign" name="price" placeholder="Price" value="{{ prod.price }}">
+            <input type="number" class="allign" name="price" placeholder="Price" value="0">
             {{ form.price.errors }}
         </p>
         <p>
-            <input type="number" class="allign" name="stock" placeholder="Stock" value="{{ prod.stock }}">
+            <input type="number" class="allign" name="stock" placeholder="Stock" value="0">
             {{ form.stock.errors }}
         </p>
         <input type="hidden" name="prodid" value="{{ prodid }}">

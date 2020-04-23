@@ -18,7 +18,7 @@
             product: {{ cart.product.product_name }}<br>
             description: {{ cart.product.description }}<br>
             price: {{ cart.product.price }}<br>
-            stock: {{ cart.product.stock }}<br>
+            quantity: {{ cart.quantity }}
         </p>
     {% endfor %}
     <p>Total : {{ sum }}</p>

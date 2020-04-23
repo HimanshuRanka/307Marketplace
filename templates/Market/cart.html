@@ -18,6 +18,7 @@
             product: {{ cart.product.product_name }}<br>
             description: {{ cart.product.description }}<br>
             price: {{ cart.product.price }}<br>
+            quantity: {{ cart.quantity }}<br>
             <button class="remove" data-user="{{ request.session.username }}" data-list="{{ cart.id }}" data-prod="{{ cart.product.id }}">remove</button>
         </p><br>
     {% endfor %}
