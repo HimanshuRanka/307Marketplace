@@ -2,6 +2,9 @@
 
 {% block style %}
      <style>
+        html{
+        background-color: #bec4db;
+        }
         .product {
             border-style: inset;
             text-align: center;
@@ -70,6 +73,7 @@
 
 
 {% block body_plus %}
+<html>
 <h1>My Listings:</h1>
 <div class="listingpage">
     {% for listing in my_listing %}
@@ -91,6 +95,7 @@
 
     {% endfor %}
 </div>
+</html>
 {% endblock %}
 
 {% block javascript %}

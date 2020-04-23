@@ -2,6 +2,9 @@
 
 {% block style %}
     <style>
+        html{
+        background-color: #bec4db;
+        }
         .cartpage{
             display:flex;
             flex-direction: column;
@@ -72,6 +75,7 @@
 {% endblock %}
 
 {% block body_plus %}
+<html>
 <h1>My Cart:</h1>
 <div class="cartpage">
 <div class="cartitemarea">
@@ -90,6 +94,7 @@
 </div>
 <a id="checkout" href="{% url 'checkout' %}">checkout</a>
 </div>
+</html>
 {% endblock %}
 
 {% block javascript %}

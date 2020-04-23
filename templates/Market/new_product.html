@@ -1,6 +1,9 @@
 {% extends 'account/../base.html' %}
 {% block style %}
 <style>
+    html{
+        background-color: #bec4db;
+        }
     .center {
         margin: auto;
         text-align: center;
@@ -43,6 +46,7 @@
     </style>
 {% endblock %}
 {% block body-block %}
+<html>
 <div class="center">
     <h1>Create a Listing:</h1>
 
@@ -61,7 +65,7 @@
             {{ form.price.errors }}
         </div>
         <div class="newiteminput">
-            <input type="number" class="allign" name="stock" placeholder="Stock" value="{{ form.data.stock }}">
+            <input type="number" class="allign" name="stock" placeholder="Stock Count" value="{{ form.data.stock }}">
             {{ form.stock.errors }}
         </div>
         <input id="submitbutton" class="allign" type="submit">
@@ -69,4 +73,5 @@
     </form>
 
 </div>
+</html>
 {% endblock %}

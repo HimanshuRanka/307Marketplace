@@ -2,6 +2,9 @@
 
 {% block style %}
     <style>
+        html{
+        background-color: #bec4db;
+        }
         .product {
             border-style: inset;
             text-align: center;
@@ -57,6 +60,7 @@
 {% endblock %}
 
 {% block body_plus %}
+<html>
     {# Im not sure which database we are using but #}
     {% for cart in cart_list %}
         <p class="product">
@@ -86,7 +90,7 @@
     </div>
 </div>
     <button id="submitbutton" class="buy" data-user="{{ request.session.username }}">buy</button>
-
+    </html>
 {% endblock %}
 {% block javascript %}
     <script type="text/javascript">
