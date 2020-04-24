@@ -11,44 +11,67 @@
         padding: 10px;
     }
 
-    div {
-        border-style: inset;
+    .newiteminput {
+        border: none;
         padding: 30px;
+        background-color: antiquewhite;
     }
 
     input {
+       
+        font-size:30px;
         margin: auto;
         width: 70%;
         text-align: center;
         border-style: groove;
         border-color: darkgray;
-        margin-bottom: 5px;
-        height: 20px;
+        margin-bottom: 20px;
+        margin-top:20px;
+        height: 60px;
+    
 
     }
+    .updatetitle{
+        font-size:60px;
+        margin-top: 40px;
+        margin-bottom:20px;
+        font-weight:600;
+    }
+
+    #submitbutton{
+        width:200px;
+        height:100px;
+        margin-top:50px;
+        border:none;
+        background-color:black;
+        color:white;
+        font-size:28px;
+        font-weight: 600;
+    }
+    #submitbutton:hover{
+        background-color:rgb(141, 107, 62) ;
+        cursor: pointer;
+    }
+
     </style>
 {% endblock %}
 {% block body-block %}
 <div class="center">
-    Update Information:
     <form method="post" action="{% url 'update' %}">
         {% csrf_token %}
-        <p>
-            <input type="text" class="allign" name="description" placeholder="Description" value="{{ prod.description }}"
+        
+        <div class="newiteminput">
+            <div class="updatetitle"> Update Information:</div>
+            <input type="text" class="allign" name="description" placeholder="new description" value="{{ prod.description }}">
             {{ form.description.errors }}
-        </p>
-        <p>
-            <input type="number" class="allign" name="price" placeholder="Price" value="0">
+            <input type="number" class="allign" name="price" placeholder="Price" value="new price">
             {{ form.price.errors }}
-        </p>
-        <p>
-            <input type="number" class="allign" name="stock" placeholder="Stock" value="0">
+            <input type="number" class="allign" name="stock" placeholder="Stock" value="new stock">
             {{ form.stock.errors }}
-        </p>
+            <br>
         <input type="hidden" name="prodid" value="{{ prodid }}">
-        <input class="allign" type="submit">
-
-    </form>
-
+        <input id="submitbutton" class="allign" type="submit">
+    </div>
+</form>
 </div>
 {% endblock %}
