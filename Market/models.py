@@ -28,9 +28,6 @@ class Product(models.Model):
     )
     category = models.CharField(max_length=200, choices=CATEGORY_CHOICES, default="none")
 
-    def stock(self):
-        return self.stock
-
 
 class Purchase(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

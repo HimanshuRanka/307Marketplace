@@ -19,7 +19,7 @@ class AddressForm(ModelForm):
         widgets = {'user': forms.HiddenInput()}
 
 
-class UpdateProductForm(forms.Form):
+class UpdateProductForm(ModelForm):
     prodid = forms.IntegerField()
 
     class Meta:

@@ -67,9 +67,11 @@
             <div class="updatetitle"> Update Information:</div>
             <input type="text" class="allign" name="description" placeholder="new description" value="{{ prod.description }}">
             {{ form.description.errors }}
-            <input type="number" class="allign" name="price" placeholder="Price" value="new price">
+
+            <input type="number" class="allign" name="price" placeholder="Price" value="">
             {{ form.price.errors }}
-            <input type="number" class="allign" name="stock" placeholder="Stock" value="new stock">
+
+            <input type="number" class="allign" name="stock" placeholder="Stock" value="">
             {{ form.stock.errors }}
             <br>
         <input type="hidden" name="prodid" value="{{ prodid }}">
