@@ -64,9 +64,11 @@
             background-color:rgb(141, 107, 62) ;
             cursor: pointer;
         }
-        h1{
+        .listingtitle{
             font-size:60px;
-            margin-left:20px;
+            margin-left:30px;
+            font-weight: 600;
+            margin-top: 40px;
         }
     </style>
 {% endblock %}
@@ -74,7 +76,7 @@
 
 {% block body_plus %}
 <html>
-<h1>My Listings:</h1>
+<div class="listingtitle">My Listings:<div>
 <div class="listingpage">
     {% for listing in my_listing %}
         <div class="listingitem" id="product{{ listing.id }}">

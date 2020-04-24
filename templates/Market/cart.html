@@ -67,16 +67,18 @@
             background-color:rgb(141, 107, 62) ;
             cursor: pointer;
         }
-        h1{
+        .carttitle{
             font-size:60px;
             margin-left:20px;
+            font-weight:600;
+            margin-top:40px;
         }
     </style>
 {% endblock %}
 
 {% block body_plus %}
 <html>
-<h1>My Cart:</h1>
+<div class="carttitle">My Cart:</div>
 <div class="cartpage">
 <div class="cartitemarea">
     {% for cart in my_cart %}
