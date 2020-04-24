@@ -16,5 +16,4 @@ urlpatterns = [
     path('listings/delete', views.delete, name='delete'),
     path('listings/update', views.update, name='update'),
     path('orders/', views.order_history, name='order_history'),
-
 ]

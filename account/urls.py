@@ -25,7 +25,7 @@ urlpatterns = [
     path('home/', views.index, name='home'),
     path('register/', views.register, name='register'),
     path('logout/', views.user_logout, name="user_logout"),
-
+    path('iteminfo/<product_id>', views.more_info, name='moreinfo'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

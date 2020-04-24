@@ -12,6 +12,22 @@ from . import forms
 
 # should use generics but have not learned that yet. Also need to build the back end data structs
 
+def more_info(request, product_id):
+    context={}
+    prod = Product.objects.get(id=product_id)
+    context['owner'] = prod.owner
+    context['name'] = prod.product_name
+    context['rating'] = prod.product_rating
+    context['pic'] = prod.product_picture
+    context['desc'] = prod.description
+    context['price'] = prod.price
+    context['stock'] = prod.stock
+    context['date'] = prod.pub_date
+
+
+    return render(request,'account/iteminfo.html', context)
+
+
 def index(request):
     products = Product.objects.all().order_by('-pub_date')[:20]
     context = {'products': products}
