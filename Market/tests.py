@@ -3,20 +3,25 @@ from django.test import TestCase
 
 
 # Create your tests here.
+from django.urls import reverse
+
 from Market.models import Product
 
+def createUser(name):
+    return User.objects.create_user(username=name, password="tester")
 
-def createListing():
-    user = User.objects.create_user(username="tester", password="tester")
-    return Product.objects.create(owner=user, product_name="test", description="test des", price=100, )
+def createListing(name, user):
+    return Product.objects.create(owner=user, product_name=name, description="test des", price=100, stock=5)
+
+
 
 class ListingFunctionsTests(TestCase):
     """
         Test:
-        - creat_listing: returns an object when searched in Listings
         - update listing: changed = true
-        - delete listing: returns does not exists when looked for in Listings
+
     """
+
 
 
 class CartFunctionsTests(TestCase):
@@ -27,3 +32,8 @@ class CartFunctionsTests(TestCase):
             - both done by testing quantity values
 
     """
+
+    def test_add_to_cart(self):
+        user = createUser("u1")
+        createListing("l1", user)
+

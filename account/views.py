@@ -34,7 +34,7 @@ def more_info(request, product_id):
     context['price'] = prod.price
     context['stock'] = prod.stock
     context['date'] = prod.pub_date
-    return render(request,'account/iteminfo.html', context)
+    return render(request,'Market/iteminfo.html', context)
 
 
 def index(request):

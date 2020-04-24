@@ -1,5 +1,10 @@
 #ignore pychahce
-*.pyc
-**/__pycache__/
+*.py[cod]
+Market/__pycache__/
+account/__pycache__/
+marketplace/__pycache__/
+Market/migrations/
+account/migrations/
+marketplace/migrations/
 db.sqlite3
- **/venv/
+venv/
