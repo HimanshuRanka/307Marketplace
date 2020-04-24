@@ -86,7 +86,7 @@
         <div class="carttext" id="product{{ cart.product.id }}">
             <div id="cartfield"> product: <span id="cartvalue"> {{ cart.product.product_name }}</span></div>
             <div id="cartfield"> description: <span id="cartvalue">{{ cart.product.description }}</span></div>
-            <div id="cartfield"> price: <span id="cartvalue">{{ cart.product.price }}</span></div>
+            <div id="cartfield"> price: $<span id="cartvalue">{{ cart.product.price }}</span></div>
             <div id="cartfield"> quantity: <span id="cartvalue">{{ cart.quantity }}</span></div>
         </div>   
             <button class="remove" data-user="{{ request.session.username }}" data-list="{{ cart.id }}" data-prod="{{ cart.product.id }}">remove</button>

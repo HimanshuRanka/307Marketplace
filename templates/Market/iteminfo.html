@@ -96,5 +96,40 @@
         margin-top:350px;
     }
 
+
 </style>
 
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $('.addproduct').click(function() {
+            var catid = $(this).attr("data-catid");
+            var user = $(this).attr("data-user");
+            var stock = $(this).attr("data-stock");
+            $.ajax({
+                type: "GET",
+                url: "{% url 'add' %}",
+                data: {
+                    'prod_id': catid,
+                    'username': user,
+                },
+                success: function (response) {
+                    console.log(response);
+                    var instance = JSON.parse(response["prod"]);
+                    var fields = instance[0]["fields"];
+                    console.log(fields['stock']);
+                    if(fields['stock'] < 1){
+                        $('#addprod'+catid).replaceWith('<span style="color: red">OUT OF STOCK</span>');
+                        $('#span'+catid).remove();
+                    }
+                },
+                error: function (response){
+                    console.log(response);
+                }
+            });
+        });
+    </script>
+
+
+{% endblock %}

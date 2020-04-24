@@ -86,13 +86,13 @@
         <div class="product">
             <div class="field">product: <span class="fieldvalues">{{ cart.product.product_name }}</span></div>
             <div class="field">description: <span class="fieldvalues">{{ cart.product.description }}</span></div>
-            <div class="field">price: <span class="fieldvalues"></span>{{ cart.product.price }}</span></div>
+            <div class="field">price: $<span class="fieldvalues"></span>{{ cart.product.price }}</span></div>
             <div class="field">quantity: <span class="fieldvalues"></span>{{ cart.quantity }}</span></div>
         </div>
     {% endfor %}
     <div class="yourcarttext">Checkout:<div>
     <div class="center">
-    <h3>Total : {{ sum }}</h3>
+    <h3>Total : ${{ sum }}</h3>
 
     <h2>Shipping address:</h2>
     <div id="addr">
