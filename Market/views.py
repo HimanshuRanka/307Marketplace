@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core import serializers
-from django.db.models import F
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -16,7 +15,8 @@ from Market.models import Product, Listing, Purchase, Cart
 def add_product(request):
     context = {}
     if request.method == 'POST':
-        form = NewProductForm(request.POST)
+        form = NewProductForm(request.POST, request.FILES)
+        print(form.is_valid())
         if form.is_valid():
             prod = form.save(commit=False)
             prod.owner = request.user
@@ -76,6 +76,10 @@ def add_to_cart(request):
 @login_required
 def delete(request):
     prod_id = request.GET.get('prod_id')
+
+    # There is some issue in our database file, which causes an error when we run .delete(). The ajax and logic work
+    # fine. comment out the line below if delete does not work to test the logic
+
     Product.objects.filter(pk=prod_id).delete()
     return JsonResponse({"valid": True}, status=200)
 
@@ -87,9 +91,13 @@ def remove(request):
     product = Product.objects.get(pk=cart_obj.product_id)
     product.stock = product.stock + 1
     product.save()
-    cart_obj.delete()
-
-    return JsonResponse({"valid": True}, status=200)
+    if cart_obj.quantity < 2:
+        cart_obj.delete()
+        return JsonResponse({"delete": True}, status=200)
+    else:
+        cart_obj.quantity = cart_obj.quantity - 1
+        cart_obj.save()
+        return JsonResponse({"delete": False}, status=200)
 
 
 @login_required

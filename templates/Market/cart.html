@@ -94,7 +94,7 @@
 
             <div id="cartfield"> quantity: <span id="cartvalue">{{ cart.quantity }}</span></div>
         </div>   
-            <button class="remove" data-user="{{ request.session.username }}" data-list="{{ cart.id }}" data-prod="{{ cart.product.id }}">remove</button>
+            <button class="remove" id="button{{ cart.product.id }}" data-user="{{ request.session.username }}" data-list="{{ cart.id }}" data-prod="{{ cart.product.id }}">remove</button>
         
     </div>
     {% endfor %}
@@ -119,7 +119,10 @@
                     'user': user,
                 },
                 success: function (response) {
-                    $('#product'+prodid).remove();
+                    if (response["delete"]) {
+                        $('#product' + prodid).remove();
+                        $('#button' + prodid).remove();
+                    }
                     console.log("product"+prodid);
                 },
                 error: function (response) {

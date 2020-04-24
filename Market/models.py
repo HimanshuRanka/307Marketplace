@@ -13,7 +13,7 @@ class Product(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=50)
     product_rating = models.IntegerField(default=0)
-    product_picture = models.ImageField(upload_to= '', blank=True)
+    product_picture = models.FileField(upload_to='', blank=True)
     description = models.CharField(max_length=50)
     price = models.IntegerField()
     stock = models.IntegerField()
@@ -27,6 +27,9 @@ class Product(models.Model):
         ('H', 'Headphone')
     )
     category = models.CharField(max_length=200, choices=CATEGORY_CHOICES, default="none")
+
+    def stock(self):
+        return self.stock
 
 
 class Purchase(models.Model):

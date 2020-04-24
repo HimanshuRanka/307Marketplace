@@ -1,81 +1,102 @@
 {% extends 'account/../base.html' %}
 {% block style %}
-<style>
-    html{
-        background-color: #bec4db;
+    <style>
+        html {
+            background-color: #bec4db;
         }
-    .center {
-        margin: auto;
-        text-align: center;
-        background-color: antiquewhite;
-        width:60%;
-        padding:20px;
-        padding-bottom:80px;
 
-    }
+        .center {
+            margin: auto;
+            text-align: center;
+            background-color: antiquewhite;
+            width: 60%;
+            padding: 20px;
+            padding-bottom: 80px;
 
-    .newproducttitle {
-        font-size:60px;
-        font-weight:600;
-    }
+        }
 
-    input {
-        font-size:30px;
-        margin: auto;
-        width: 70%;
-        text-align: center;
-        border-style: groove;
-        border-color: darkgray;
-        margin-bottom: 20px;
-        margin-top:20px;
-        height: 60px;
-    }
+        .newproducttitle {
+            font-size: 60px;
+            font-weight: 600;
+        }
 
-    #submitbutton{
-        width:200px;
-        height:100px;
-        margin-top:50px;
-        border:none;
-        background-color:black;
-        color:white;
-        font-size:28px;
-        font-weight: 600;
-    }
-    #submitbutton:hover{
-        background-color:rgb(141, 107, 62) ;
-        cursor: pointer;
-    }
+        input {
+            font-size: 30px;
+            margin: auto;
+            width: 70%;
+            text-align: center;
+            border-style: groove;
+            border-color: darkgray;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            height: 60px;
+        }
+
+        #submitbutton {
+            width: 200px;
+            height: 100px;
+            margin-top: 50px;
+            border: none;
+            background-color: black;
+            color: white;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        #submitbutton:hover {
+            background-color: rgb(141, 107, 62);
+            cursor: pointer;
+        }
     </style>
 {% endblock %}
 {% block body-block %}
-<html>
-<div class="center">
+    <html>
+    <div class="center">
 
-    <div class="newproducttitle">Create a Listing:</div>
+        <div class="newproducttitle">Create a Listing:</div>
 
 
-    <form method="post" action="{% url 'new_product' %}">
-        {% csrf_token %}
-        <div class="newiteminput">
-            <input type="text" class="allign" name="product_name" placeholder="Product Title" value="{{ form.data.product_name }}">
-            {{ form.product_name.errors }}
-        </div>
-        <div class="newiteminput">
-            <input type="text" class="allign" name="description" placeholder="Description" value="{{ form.data.description }}">
-            {{ form.description.errors }}
-        </div>   
-        <div class="newiteminput">    
-            <input type="number" class="allign" name="price" placeholder="Price" value="{{ form.data.price }}">
-            {{ form.price.errors }}
-        </div>
-        <div class="newiteminput">
-            <input type="number" class="allign" name="stock" placeholder="Stock Count" value="{{ form.data.stock }}">
-            {{ form.stock.errors }}
-        </div>
-        <input id="submitbutton" class="allign" type="submit">
+        <form method="post" action="{% url 'new_product' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="newiteminput">
+                <input type="text" class="allign" name="product_name" placeholder="Product Title"
+                       value="{{ form.data.product_name }}">
+                {{ form.product_name.errors }}
+            </div>
+            <div class="newiteminput">
+                <input type="file" class="allign" name="product_picture">
+                {{ form.product_picture.errors }}
+            </div>
+            <div class="newiteminput">
+                <input type="text" class="allign" name="description" placeholder="Description"
+                       value="{{ form.data.description }}">
+                {{ form.description.errors }}
+            </div>
+            <div class="newiteminput">
+                <input type="number" class="allign" name="price" placeholder="Price" value="{{ form.data.price }}">
+                {{ form.price.errors }}
+            </div>
+            <div class="newiteminput">
+                <input type="number" class="allign" name="stock" placeholder="Stock Count"
+                       value="{{ form.data.stock }}">
+                {{ form.stock.errors }}
+            </div>
+            <div class="newiteminput">
+                <input list="categories" class="allign" name="category" placeholder="Category"
+                       value="{{ form.data.category }}">
+                <datalist id="categories">
+                    <option value="G">
+                    <option value="L">
+                    <option value="M">
+                    <option value="K">
+                    <option value="H">
+                </datalist><br>
+                G: Game, L: Laptop, M: Mouse, K: Keyboard, H: Headphones
+                {{ form.category.errors }}
+            </div>
+            <input id="submitbutton" class="allign" type="submit">
+        </form>
 
-    </form>
-
-</div>
-</html>
+    </div>
+    </html>
 {% endblock %}
