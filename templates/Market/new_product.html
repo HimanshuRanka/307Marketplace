@@ -1,56 +1,77 @@
 {% extends 'account/../base.html' %}
 {% block style %}
 <style>
+    html{
+        background-color: #bec4db;
+        }
     .center {
         margin: auto;
-        width: 40%;
         text-align: center;
-    }
+        background-color: antiquewhite;
+        width:60%;
+        padding:20px;
+        padding-bottom:80px;
 
+    }
     h1 {
-        padding: 10px;
-    }
-
-    div {
-        border-style: inset;
-        padding: 30px;
+        font-size:60px;
     }
 
     input {
+        font-size:30px;
         margin: auto;
         width: 70%;
         text-align: center;
         border-style: groove;
         border-color: darkgray;
-        margin-bottom: 5px;
-        height: 20px;
+        margin-bottom: 20px;
+        margin-top:20px;
+        height: 60px;
+    }
 
+    #submitbutton{
+        width:200px;
+        height:100px;
+        margin-top:50px;
+        border:none;
+        background-color:black;
+        color:white;
+        font-size:28px;
+        font-weight: 600;
+    }
+    #submitbutton:hover{
+        background-color:rgb(141, 107, 62) ;
+        cursor: pointer;
     }
     </style>
 {% endblock %}
 {% block body-block %}
+<html>
 <div class="center">
+    <h1>Create a Listing:</h1>
+
     <form method="post" action="{% url 'new_product' %}">
         {% csrf_token %}
-        <p>
+        <div class="newiteminput">
             <input type="text" class="allign" name="product_name" placeholder="Product Title" value="{{ form.data.product_name }}">
             {{ form.product_name.errors }}
-        </p>
-        <p>
-            <input type="text" class="allign" name="description" placeholder="Description" value="{{ form.data.description }}"
+        </div>
+        <div class="newiteminput">
+            <input type="text" class="allign" name="description" placeholder="Description" value="{{ form.data.description }}">
             {{ form.description.errors }}
-        </p>
-        <p>
+        </div>   
+        <div class="newiteminput">    
             <input type="number" class="allign" name="price" placeholder="Price" value="{{ form.data.price }}">
             {{ form.price.errors }}
-        </p>
-        <p>
-            <input type="number" class="allign" name="stock" placeholder="Stock" value="{{ form.data.stock }}">
+        </div>
+        <div class="newiteminput">
+            <input type="number" class="allign" name="stock" placeholder="Stock Count" value="{{ form.data.stock }}">
             {{ form.stock.errors }}
-        </p>
-        <input class="allign" type="submit">
+        </div>
+        <input id="submitbutton" class="allign" type="submit">
 
     </form>
 
 </div>
+</html>
 {% endblock %}
