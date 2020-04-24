@@ -2,16 +2,65 @@
 
 {% block style %}
     <style>
+        html{
+        background-color: #bec4db;
+        }
         .product {
             border-style: inset;
             text-align: center;
             margin: 10px;
             float: left
         }
+        .center{
+            margin: auto;
+            text-align: center;
+            background-color: antiquewhite;
+            width:60%;
+            padding:20px;
+            padding-bottom:80px;
+        }
+        h1{
+            font-size: 60px;
+            margin:20px;
+        }
+        h2{
+            font-size:40px;
+        }
+        h3{
+            font-size:30px;
+        }
+
+        input {
+            font-size:30px;
+            margin: auto;
+            width: 70%;
+            text-align: center;
+            border-style: groove;
+            border-color: darkgray;
+            margin-bottom: 20px;
+            margin-top:20px;
+            height: 60px;
+        }
+        #submitbutton{
+        width:200px;
+        height:100px;
+        margin-top:50px;
+        border:none;
+        background-color:black;
+        color:white;
+        font-size:28px;
+        font-weight: 600;
+        align-self: center;
+    }
+        #submitbutton:hover{
+            background-color:rgb(141, 107, 62) ;
+            cursor: pointer;
+        }
     </style>
 {% endblock %}
 
 {% block body_plus %}
+<html>
     {# Im not sure which database we are using but #}
     {% for cart in cart_list %}
         <p class="product">
@@ -21,11 +70,11 @@
             quantity: {{ cart.quantity }}
         </p>
     {% endfor %}
-    <p>Total : {{ sum }}</p>
-    <br>
-    <br>
-    <br>
-    Shipping address:
+    <div class="center">
+    <h1>Checkout:</h1>
+    <h3>Total : {{ sum }}</h3>
+
+    <h2>Shipping address:</h2>
     <div id="addr">
         <form id="address" method="post" action="">
             {% csrf_token %}
@@ -36,11 +85,12 @@
             <p><input type="text" name="Country" placeholder="Country"> {{ form.Country.errors }}</p><br>
             <p><input type="text" name="Zipcode" placeholder="Zip Code"> {{ form.Zipcode.errors }}</p><br>
             <p><input type="hidden" name="user" value="{{ request.session.username }}"></p>
-            <p><input type="submit"></p>
+            <p><input id="submitbutton" type="submit"></p>
         </form>
     </div>
-    <br><button class="buy" data-user="{{ request.session.username }}">buy</button>
-
+</div>
+    <button id="submitbutton" class="buy" data-user="{{ request.session.username }}">buy</button>
+    </html>
 {% endblock %}
 {% block javascript %}
     <script type="text/javascript">
@@ -48,7 +98,7 @@
             var user = $(this).attr("data-user");
             $.ajax({
                 type: "GET",
-                url: '{% url 'buy' %}',
+                url: "{% url 'buy' %}",
                 data: {
                     'user': user,
                 },

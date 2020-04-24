@@ -139,7 +139,7 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/image/'
-MEDIA_ROOT = 'C:/Users/himan/marketplace/media'
+MEDIA_ROOT = 'static/item_pics/'
 
 LOGIN_URL = 'account/login/'
 

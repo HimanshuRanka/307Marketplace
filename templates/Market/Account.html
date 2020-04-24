@@ -1,12 +1,27 @@
 {% extends 'account/../base.html' %}
 {% block style %}
     <style>
+    html{
+        background-color: rgb(190, 196, 219);
+    }
     .details{
         margin: auto;
         width: 40%;
         text-align: center;
         border-style: inset;
         padding: 30px;
+        background-color: antiquewhite;
+
+    }
+    .accounttext{
+        font-size:40px;
+    }
+    .accountfield{
+        font-weight:600;
+        margin:20px;
+    }
+    .accountvalue{
+        font-weight:500;
     }
     </style>
 {% endblock %}
@@ -20,13 +35,15 @@
 {% endblock %}
 
 {% block body_plus %}
+<html>
     <div class="details">
-        <p>
-            Username: {{ request.session.username }}<br>
-            Password: ********<br>
-            Name: {{ request.session.first_name }} {{ request.session.last_name }}<br>
-            Email: {{ request.session.email }}<br>
-        </p>
+        <div class="accounttext">
+            <div class="accountfield"> Username: <span class="accountvalue"> {{ request.session.username }}</span></div>
+            <div class="accountfield">Password: <span class="accountvalue">  ******** </span></div>
+            <div class="accountfield">Name: <span class="accountvalue">  {{ request.session.first_name }} {{ request.session.last_name }}</span></div>
+            <div class="accountfield">Email: <span class="accountvalue"> {{ request.session.email }}</span></div>
+        </div>
     </div>
-{% endblock %}
+</html>
+    {% endblock %}
 

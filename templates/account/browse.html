@@ -6,69 +6,22 @@
         margin: 0px;
         padding:0px;
     }
+
+    #browsePage{
+        background-color: #bec4db;
+    }
     </style>
 {% endblock %}
 
 {% block body-block %}
+<body id="browsepage">
+    
 {% include 'account/../base.html' %}
 {% include 'account/../sidebar.html' %}
 
 <div class="cards">
 {% include 'account/../itemcard.html' %}
-{% include 'account/../itemcard.html' %}
-{% include 'account/../itemcard.html' %}
-{% include 'account/../itemcard.html' %}
-
 </div>
 
-    {% load static %}
-    <img id='banner' src="banner.jpg" alt="aa">
-
-    {% for product in products %}
-        <p class="product">
-            product: {{ product.product_name }}<br>
-            description: {{ product.description }}<br>
-            price: {{ product.price }}<br>
-
-            {% if product.stock > 0 %}
-                 <span id="span{{ product.id }}" style="color: green">In Stock</span><br>
-                <button class="addproduct" id="addprod{{ product.id }}" data-stock="{{ product.stock }}" data-catid="{{ product.id }}" data-user="{{ request.session.username }}">add to cart</button>
-            {% else %}
-                <span style="color: red">OUT OF STOCK</span>
-            {% endif %}
-            </p>
-    {% endfor %}
-
-{% endblock %}
-{% block javascript %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        $('.addproduct').click(function() {
-            var catid = $(this).attr("data-catid");
-            var user = $(this).attr("data-user");
-            var stock = $(this).attr("data-stock");
-            $.ajax({
-                type: "GET",
-                url: '{% url 'add' %}',
-                data: {
-                    'prod_id': catid,
-                    'username': user,
-                },
-                success: function (response) {
-                    console.log(response);
-                    var instance = JSON.parse(response["prod"]);
-                    var fields = instance[0]["fields"];
-                    console.log(fields['stock']);
-                    if(fields['stock'] < 1){
-                        $('#addprod'+catid).replaceWith('<span style="color: red">OUT OF STOCK</span>');
-                        $('#span'+catid).remove();
-                    }
-                },
-                error: function (response){
-                    console.log(response);
-                }
-            });
-        });
-
-    </script>
+</body>
 {% endblock %}

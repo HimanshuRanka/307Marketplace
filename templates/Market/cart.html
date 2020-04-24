@@ -2,27 +2,99 @@
 
 {% block style %}
     <style>
+        html{
+        background-color: #bec4db;
+        }
+        .cartpage{
+            display:flex;
+            flex-direction: column;
+        }
         .product {
             border-style: inset;
             text-align: center;
             margin: 10px;
             float: left
         }
+        .cartitem{
+            display: flex;
+            flex-direction: row;
+            margin:20px;
+            border:solid 1px;
+            padding:30px;
+            background-color: antiquewhite;
+            width:50%;
+            min-width: 1400px;
+        }
+        .carttext{
+            font-size:40px;
+            width:1000px;
+        }
+        #cartfield{
+            font-weight:600;
+            margin:20px;
+        }
+        #cartvalue{
+            font-weight:500;
+        }
+
+        .remove{
+            width:200px;
+            height:100px;
+            margin:20px;
+            border:none;
+            background-color:black;
+            color:white;
+            font-size:28px;
+            font-weight: 600;
+        }
+        .remove:hover{
+            background-color:rgb(141, 107, 62) ;
+            cursor: pointer;
+        }
+
+        #checkout{
+            width:200px;
+            height:100px;
+            margin-left:1200px;
+            border:none;
+            background-color:black;
+            color:white;
+            font-size:40px;
+            font-weight: 600;
+            text-align:center;
+        }
+        #checkout:hover{
+            background-color:rgb(141, 107, 62) ;
+            cursor: pointer;
+        }
+        h1{
+            font-size:60px;
+            margin-left:20px;
+        }
     </style>
 {% endblock %}
 
 {% block body_plus %}
-    {# Im not sure which database we are using but #}
+<html>
+<h1>My Cart:</h1>
+<div class="cartpage">
+<div class="cartitemarea">
     {% for cart in my_cart %}
-        <p id="product{{ cart.product.id }}">
-            product: {{ cart.product.product_name }}<br>
-            description: {{ cart.product.description }}<br>
-            price: {{ cart.product.price }}<br>
-            quantity: {{ cart.quantity }}<br>
+    <div class="cartitem">
+        <div class="carttext" id="product{{ cart.product.id }}">
+            <div id="cartfield"> product: <span id="cartvalue"> {{ cart.product.product_name }}</span></div>
+            <div id="cartfield"> description: <span id="cartvalue">{{ cart.product.description }}</span></div>
+            <div id="cartfield"> price: <span id="cartvalue">{{ cart.product.price }}</span></div>
+            <div id="cartfield"> quantity: <span id="cartvalue">{{ cart.quantity }}</span></div>
+        </div>   
             <button class="remove" data-user="{{ request.session.username }}" data-list="{{ cart.id }}" data-prod="{{ cart.product.id }}">remove</button>
-        </p><br>
+        
+    </div>
     {% endfor %}
-    <a id="checkout" href="{% url 'checkout' %}">checkout</a>
+</div>
+<a id="checkout" href="{% url 'checkout' %}">checkout</a>
+</div>
+</html>
 {% endblock %}
 
 {% block javascript %}
