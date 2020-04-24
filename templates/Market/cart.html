@@ -34,7 +34,7 @@
             var prodid = $(this).attr("data-prod");
             $.ajax({
                 type: "GET",
-                url: '{% url 'remove' %}',
+                url: "{% url 'remove' %}",
                 data: {
                     'cart_id': listid,
                     'user': user,
