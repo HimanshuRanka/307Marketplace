@@ -72,6 +72,8 @@
             {% else %}
                 <a href="{% url 'my_account' %}">hello, {{ request.session.username }}</a>
                 <a href="{% url 'cart' %}">Cart</a>
+                <a href="{% url 'chat_index' %}">Chat</a>
+                <a onclick="openInbox()" style="cursor: pointer">Inbox</a>
                 <a href="{% url 'user_logout' %}">Logout</a>
             {% endif %}
         </div>
@@ -85,6 +87,11 @@
 {% endblock %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>
+  function openInbox() {
+    window.location.pathname = '/chat/' + "{{ request.session.username }}" + '/';
+  };
+</script>
 {% block javascript %}
 
 {% endblock %}
