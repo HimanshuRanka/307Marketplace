@@ -5,12 +5,37 @@ from django.db import IntegrityError
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
+from django.db.models import Q 
 
 from Market.models import Product
 from . import forms
 
 
 # should use generics but have not learned that yet. Also need to build the back end data structs
+def category(request, cate):
+    context={}
+    if (cate=="general") or (cate==""):
+        prod=Product.objects.all()
+    else:
+        prod=Product.objects.filter(category=cate)
+    context['products'] = prod;
+    context['r'] = render(request, 'itemcard.html', context)
+    return render(request,'account/browse.html',context)
+
+def more_info(request, product_id):
+    context={}
+    prod = Product.objects.get(id=product_id)
+    context['product'] = prod;
+    context['owner'] = prod.owner
+    context['name'] = prod.product_name
+    context['rating'] = prod.product_rating
+    context['pic'] = prod.product_picture
+    context['desc'] = prod.description
+    context['price'] = prod.price
+    context['stock'] = prod.stock
+    context['date'] = prod.pub_date
+    return render(request,'account/iteminfo.html', context)
+
 
 def index(request):
     products = Product.objects.all().order_by('-pub_date')[:20]

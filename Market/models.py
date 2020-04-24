@@ -19,6 +19,15 @@ class Product(models.Model):
     stock = models.IntegerField()
     pub_date = models.DateTimeField('date published', default=timezone.now)
     changed = models.BooleanField(default=False)
+    CATEGORY_CHOICES = (
+        ('G', 'Game'),
+        ('L', 'Laptop'),
+        ('M', 'Mouse'),
+        ('K', 'Keyboard'),
+        ('H', 'Headphone')
+    )
+    category = models.CharField(max_length=200, choices=CATEGORY_CHOICES, default="none")
+
 
 class Purchase(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

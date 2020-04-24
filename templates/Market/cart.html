@@ -67,16 +67,21 @@
             background-color:rgb(141, 107, 62) ;
             cursor: pointer;
         }
-        h1{
+        .carttitle{
             font-size:60px;
             margin-left:20px;
+            font-weight:600;
+            margin-top:40px;
+
         }
     </style>
 {% endblock %}
 
 {% block body_plus %}
-<html>
-<h1>My Cart:</h1>
+
+
+<div class="carttitle">My Cart:</div>
+
 <div class="cartpage">
 <div class="cartitemarea">
     {% for cart in my_cart %}
@@ -84,7 +89,9 @@
         <div class="carttext" id="product{{ cart.product.id }}">
             <div id="cartfield"> product: <span id="cartvalue"> {{ cart.product.product_name }}</span></div>
             <div id="cartfield"> description: <span id="cartvalue">{{ cart.product.description }}</span></div>
-            <div id="cartfield"> price: <span id="cartvalue">{{ cart.product.price }}</span></div>
+
+            <div id="cartfield"> price: $<span id="cartvalue">{{ cart.product.price }}</span></div>
+
             <div id="cartfield"> quantity: <span id="cartvalue">{{ cart.quantity }}</span></div>
         </div>   
             <button class="remove" data-user="{{ request.session.username }}" data-list="{{ cart.id }}" data-prod="{{ cart.product.id }}">remove</button>
@@ -94,7 +101,7 @@
 </div>
 <a id="checkout" href="{% url 'checkout' %}">checkout</a>
 </div>
-</html>
+
 {% endblock %}
 
 {% block javascript %}

@@ -2,95 +2,125 @@
 
 {% block style %}
     <style>
-        html{
-        background-color: #bec4db;
+        html {
+            background-color: #bec4db;
         }
+
         .product {
-            border-style: inset;
-            text-align: center;
-            margin: 10px;
-            float: left
+            border: none;
+            padding: 20px;
+            margin-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60%;
+            background-color: rgb(255, 227, 190);
         }
-        .center{
+
+        .field {
+            font-size: 40px;
+            font-weight: 600;
+            margin: 20px;
+        }
+
+        .fieldvalues {
+            font-weight: 500;
+        }
+
+        .center {
             margin: auto;
             text-align: center;
             background-color: antiquewhite;
-            width:60%;
-            padding:20px;
-            padding-bottom:80px;
+            width: 60%;
+            padding: 20px;
+            padding-bottom: 80px;
         }
-        h1{
+
+        .yourcarttext {
+            margin-top: 20px;
+            font-size: 80px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        h1 {
             font-size: 60px;
-            margin:20px;
+            margin: 20px;
         }
-        h2{
-            font-size:40px;
+
+        h2 {
+            font-size: 40px;
         }
-        h3{
-            font-size:30px;
+
+        h3 {
+            font-size: 30px;
         }
 
         input {
-            font-size:30px;
+            font-size: 30px;
             margin: auto;
             width: 70%;
             text-align: center;
             border-style: groove;
             border-color: darkgray;
             margin-bottom: 20px;
-            margin-top:20px;
+            margin-top: 20px;
             height: 60px;
         }
-        #submitbutton{
-        width:200px;
-        height:100px;
-        margin-top:50px;
-        border:none;
-        background-color:black;
-        color:white;
-        font-size:28px;
-        font-weight: 600;
-        align-self: center;
-    }
-        #submitbutton:hover{
-            background-color:rgb(141, 107, 62) ;
+
+        #submitbutton {
+            width: 200px;
+            height: 100px;
+            margin-top: 50px;
+            border: none;
+            background-color: black;
+            color: white;
+            font-size: 28px;
+            font-weight: 600;
+            align-self: center;
+        }
+
+        #submitbutton:hover {
+            background-color: rgb(194, 124, 34);
             cursor: pointer;
         }
     </style>
 {% endblock %}
 
 {% block body_plus %}
-<html>
     {# Im not sure which database we are using but #}
+    <div class="yourcarttext">Your Cart:</div>
     {% for cart in cart_list %}
-        <p class="product">
-            product: {{ cart.product.product_name }}<br>
-            description: {{ cart.product.description }}<br>
-            price: {{ cart.product.price }}<br>
-            quantity: {{ cart.quantity }}
-        </p>
+        <div class="product">
+            <div class="field">product: <span class="fieldvalues">{{ cart.product.product_name }}</span></div>
+            <div class="field">description: <span class="fieldvalues">{{ cart.product.description }}</span></div>
+            <div class="field">price: $<span class="fieldvalues"></span>{{ cart.product.price }}</span></div>
+            <div class="field">quantity: <span class="fieldvalues"></span>{{ cart.quantity }}</span></div>
+        </div>
     {% endfor %}
-    <div class="center">
-    <h1>Checkout:</h1>
-    <h3>Total : {{ sum }}</h3>
 
-    <h2>Shipping address:</h2>
-    <div id="addr">
-        <form id="address" method="post" action="">
-            {% csrf_token %}
-            <p><input type="text" name="line_one" placeholder="Address Line 1"> {{ form.line_one.errors }} </p><br>
-            <p><input type="text" name="line_two" placeholder="Address Line 2"> {{ form.line_two.errors }}</p><br>
-            <p><input type="text" name="city" placeholder="City"> {{ form.city.errors }}</p><br>
-            <p><input type="text" name="province" placeholder="Province"> {{ form.province.errors }}</p><br>
-            <p><input type="text" name="Country" placeholder="Country"> {{ form.Country.errors }}</p><br>
-            <p><input type="text" name="Zipcode" placeholder="Zip Code"> {{ form.Zipcode.errors }}</p><br>
-            <p><input type="hidden" name="user" value="{{ request.session.username }}"></p>
-            <p><input id="submitbutton" type="submit"></p>
-        </form>
+    <div class="yourcarttext">Checkout:
+    <div>
+    <div class="center">
+        <h3>Total : ${{ sum }}</h3>
+
+
+        <h2>Shipping address:</h2>
+        <div id="addr">
+            <form id="address" method="post" action="">
+                {% csrf_token %}
+
+                <input type="text" name="line_one" placeholder="Address Line 1"> {{ form.line_one.errors }}
+                <input type="text" name="line_two" placeholder="Address Line 2"> {{ form.line_two.errors }}
+                <input type="text" name="city" placeholder="City"> {{ form.city.errors }}
+                <input type="text" name="province" placeholder="Province"> {{ form.province.errors }}
+                <input type="text" name="Country" placeholder="Country"> {{ form.Country.errors }}
+                <input type="text" name="Zipcode" placeholder="Zip Code"> {{ form.Zipcode.errors }}
+                <input type="hidden" name="user" value="{{ request.session.username }}"> <br>
+                <input id="submitbutton" type="submit">
+            </form>
+        </div>
     </div>
-</div>
     <button id="submitbutton" class="buy" data-user="{{ request.session.username }}">buy</button>
-    </html>
 {% endblock %}
 {% block javascript %}
     <script type="text/javascript">
@@ -120,9 +150,9 @@
                 success: function (response) {
                     var instance = JSON.parse(response["instance"]);
                     var fields = instance[0]["fields"];
-                    $('#addr').html(fields["line_one"] + ", " +fields["line_two"] +
-                    ", " + fields["city"] + ", " + fields["province"] + ", " + fields["Country"]
-                    + ", " + fields["Zipcode"])
+                    $('#addr').html(fields["line_one"] + ", " + fields["line_two"] +
+                        ", " + fields["city"] + ", " + fields["province"] + ", " + fields["Country"]
+                        + ", " + fields["Zipcode"])
                 },
                 error: function (response) {
                     console.log(response);

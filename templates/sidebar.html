@@ -3,15 +3,12 @@
 <body id="sb">
     <div class="sidebar">
         <header id="titleText">Categories:</header>
-
-        <a id = "catespace" href="{% url 'user_login' %}"><div class ="cateText">General</div></a>
-        <a id = "catespace" href="{% url 'user_login' %}"><div class ="cateText">Games</div></a>
-        <a id = "catespace" href="{% url 'user_login' %}"><div class ="cateText">Laptop</div></a>
-        <a id = "catespace" href="{% url 'user_login' %}"><div class ="cateText">Mouse</div></a>
-        <a id = "catespace" href="{% url 'user_login' %}"><div class ="cateText">Keyboard</div></a>
-        <a id = "catespace" href="{% url 'user_login' %}"><div class ="cateText">Headphone</div></a>
-
-        
+        <a id = "catespace" href="../category/general"><div class ="cateText">General</div></a>
+        <a id = "catespace" href="../category/G"><div class ="cateText">Games</div></a>
+        <a id = "catespace" href="../category/L"><div class ="cateText">Laptop</div></a>
+        <a id = "catespace" href="../category/M"><div class ="cateText">Mouse</div></a>
+        <a id = "catespace" href="../category/K"><div class ="cateText">Keyboard</div></a>
+        <a id = "catespace" href="../category/H"><div class ="cateText">Headphone</div></a>
     </div>
 </body>
 </html>
@@ -21,9 +18,9 @@
     margin:0%;
 }
 .sidebar{
-    margin-top:-80%;
     display:block;
-    margin-left:0px;
+    margin-left:-8px;
+    margin-top:0px;
     width:340px;
     padding:40px;
     background-color: rgb(9, 6, 49);
@@ -51,11 +48,7 @@
 }
 
 .cateText:hover{
-    font-size: 180%;
     background-color: rgb(21, 21, 153);
 }
-
-
-
 
 </style>
