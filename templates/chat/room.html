@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+    <style>
+    .header2 {
+            margin-right: -10px;
+            margin-left: -10px;
+            background-color: rgb(117, 142, 189);
+            padding: 20px;
+            width: 100%;
+            height: 40px;
+            font-size: 200%;
+    }
+    html{
+        background-color: rgb(190, 196, 219);
+    }
+    </style>
+</head>
+<body>
+    {% include 'account/../base.html' %}
+    <div class="header2">Chat to the following user: &ensp;
+    <input id="room-name-input" type="text" size="25" style="font-size: 25pt"/>
+    <input id="room-name-submit" type="button" value="Message" style="font-size: 25pt"/></div>
+    <div class="header2">Host: {{ room_name }}</div>
+    <textarea id="chat-log" cols="62" rows="10" style="font-size: 25pt"></textarea><br/>
+    <input id="chat-message-input" type="text" size="50" style="font-size: 25pt"/>
+    <input id="chat-message-submit" type="button" value="Send" style="font-size: 25pt"/>
+</body>
+<script>
+    var roomName = "{{ room_name }}";
+
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/');
+
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        document.getElementById('chat-log').value += (message + '\n');
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.getElementById('chat-message-input').focus();
+    document.getElementById('chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.getElementById('chat-message-submit').click();
+        }
+    };
+
+    document.getElementById('chat-message-submit').onclick = function(e) {
+        var messageInputDom = document.getElementById('chat-message-input');
+        var message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+
+        messageInputDom.value = '';
+    };
+
+    document.getElementById('room-name-input').focus();
+    document.getElementById('room-name-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.getElementById('room-name-submit').click();
+        }
+    };
+
+    document.getElementById('room-name-submit').onclick = function(e) {
+        var roomName = document.getElementById('room-name-input').value;
+        window.location.pathname = '/chat/' + roomName + '/';
+    };
+
+</script>
+{% include 'account/../footer.html' %}
+</html>

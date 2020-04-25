@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+    <style>
+    html{
+        background-color: rgb(190, 196, 219);
+    }
+    .header2 {
+            margin-right: -10px;
+            margin-left: -10px;
+            background-color: rgb(117, 142, 189);
+            padding: 20px;
+            width: 100%;
+            height: 40px;
+            font-size: 200%;
+        }
+    </style>
+</head>
+<body>
+    {% include 'account/../base.html' %}
+    <div class="header2">Chat to the following user: &ensp;
+    <input id="room-name-input" type="text" size="25" style="font-size: 25pt"/>
+    <input id="room-name-submit" type="button" value="Message" style="font-size: 25pt"/></div>
+
+    <script>
+        document.getElementById('room-name-input').focus();
+        document.getElementById('room-name-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.getElementById('room-name-submit').click();
+            }
+        };
+
+        document.getElementById('room-name-submit').onclick = function(e) {
+            var roomName = document.getElementById('room-name-input').value;
+            window.location.pathname = '/chat/' + roomName + '/';
+        };
+    </script>
+</body>
+{% include 'account/../footer.html' %}
+</html>
